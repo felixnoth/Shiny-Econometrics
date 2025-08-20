@@ -139,18 +139,7 @@ window.Quarto = {
 <p>This is the <strong>Ordinary Least Squares (OLS) slope estimate</strong>.</p>
 <p><span class="math display">\[
 \widehat{\beta}_1 = \frac{\sum_{i=1}^n (\mathit{x}_i - \bar{\mathit{x}})(\mathit{y}_i - \bar{\mathit{y}})}{\sum_{i=1}^n (\mathit{x}_i - \bar{\mathit{x}})^2}
-\]</span></p>
-<section id="what-this-slideapp-shows" class="level3">
-<h3 class="anchored" data-anchor-id="what-this-slideapp-shows">What this slide/app shows</h3>
-<ul>
-<li>The slope <span class="math inline">\(\widehat{\beta}_1\)</span> scales with <strong>covariance</strong> between (X) and (Y) and inversely with the <strong>variance</strong> of (X).<br>
-</li>
-<li>If ( (X)=0 ), the denominator collapses: OLS is <strong>undefined</strong>.<br>
-</li>
-<li>We simulate bivariate Normal data with a user-chosen covariance matrix (). For () to be valid (positive definite), [ ()=(X)(Y)-(X,Y)^2&gt;0. ] If you choose settings that violate this, a real data-generating process <strong>does not exist</strong>.</li>
-</ul>
-<p><strong>How to use the app:</strong> Move the sliders for ((X)) and ((X,Y)). Watch the regression line update and the slope in the subtitle change. Try increasing (|(X,Y)|) while holding ((X)) fixed and see (|_1|) grow. If you make ((X)) tiny, the slope becomes unstable.</p>
-<p><a href="https://felixnoth.shinyapps.io/ols_slope/" target="_blank">⚡ Open App</a></p>
+\]</span> <a href="https://felixnoth.shinyapps.io/ols_slope/" target="_blank">⚡ Open App</a></p>
 <p><a href="https://github.com/felixnoth/Shiny-Econometrics/tree/main/apps/ols_slope" target="_blank">🔧 Check R Code on GitHub</a></p>
 <p><strong>When Is OLS Defined?</strong></p>
 <p>We can compute <span class="math inline">\(\widehat{\beta}_1\)</span> as long as the <strong>sample variance of <span class="math inline">\(\mathit{x}\)</span> is not 0</strong>.</p>
@@ -202,7 +191,6 @@ SSR = \sum_{i=1}^n \widehat{\varepsilon}_i^2 = \sum_{i=1}^n (\mathit{y}_i - \wid
 <p>OLS provides the <strong>best linear prediction</strong> of <span class="math inline">\(\mathit{y}\)</span> in the sense that it <strong>minimizes the prediction error</strong> among all linear estimators.</p>
 <p>There is always <strong>some prediction error</strong>, but OLS <strong>minimizes</strong> that error <strong>on average</strong>.</p>
 <p>In fact, OLS is the <strong>Best Linear Unbiased Estimator (BLUE)</strong> — it is the “least worst” linear prediction method for estimating <span class="math inline">\(\mathit{y}\)</span> from <span class="math inline">\(\mathit{x}\)</span>.</p>
-</section>
 </section>
 <section id="iv-bias-weak-instruments" class="level2">
 <h2 class="anchored" data-anchor-id="iv-bias-weak-instruments">IV Bias &amp; Weak Instruments</h2>
