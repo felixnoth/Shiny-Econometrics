@@ -1,0 +1,13 @@
+project:
+  type: website
+  output-dir: docs     # GitHub Pages will serve /docs
+website:
+  title: "IV Teaching Apps"
+  navbar:
+    left:
+      - text: Home
+        href: index.qmd
+format:
+  html:
+    theme: flatly
+    toc: false
