@@ -1,198 +1,175 @@
 ---
 title: "Shiny Econometrics Apps"
-format:
-  html:
-    toc: true
-    toc_depth: 2
-    toc_float: true
-    number_sections: true
+format: html
+
 ---
 
-# Welcome
+## 📚 Econometrics Explorer (Combined Shiny App)
 
-Use the links below to open the interactive apps.
+This app bundles six interactive modules into one interface.  
+Use the sidebar in the **combined Shiny app** to switch between modules.
 
-# Regression Review I
+[⚡ Open App](https://felixnoth.shinyapps.io/basic_ols/){target="_blank"}
 
-## Ordinary Least Squares (OLS) Slope Estimate 
+[🔧 Check R Code on GitHub](https://github.com/felixnoth/Shiny-Econometrics/tree/main/apps/basic_ols){target="_blank"} 
 
-This is the **Ordinary Least Squares (OLS) slope estimate**.
+---
 
-$$
-\widehat{\beta}_1 = \frac{\sum_{i=1}^n (\mathit{x}_i - \bar{\mathit{x}})(\mathit{y}_i - \bar{\mathit{y}})}{\sum_{i=1}^n (\mathit{x}_i - \bar{\mathit{x}})^2}
-$$
-[⚡ Open App](https://felixnoth.shinyapps.io/ols_slope/){target="_blank"}
+### 📑 Table of Contents
 
-[🔧 Check R Code on GitHub](https://github.com/felixnoth/Shiny-Econometrics/tree/main/apps/ols_slope){target="_blank"} 
+1. [Covariance → Regression](#covariance--regression)  
+2. [OLS β̂₁ Convergence (Monte Carlo with Endogeneity)](#ols-β₁-convergence-monte-carlo-with-endogeneity-ρ)  
+3. [Interactions & Squared Terms](#interactions--squared-terms)  
+4. [Omitted Variable Bias (Two Regressors)](#omitted-variable-bias-two-regressors)  
+5. [Omitted Variable Bias (Three Regressors)](#omitted-variable-bias-three-regressors)  
+6. [Attenuation Bias (Measurement Error)](#attenuation-bias-measurement-error)  
 
-**When Is OLS Defined?** 
+---
 
-We can compute $\widehat{\beta}_1$ as long as the **sample variance of $\mathit{x}$ is not 0**.
+### 1) Covariance → Regression
 
-If all individuals have the same $\mathit{x}$ (e.g., same schooling), the slope **cannot be identified**.
+**Content**
 
-A covariance matrix $\Sigma$ must satisfy two things to be valid (“positive‐definite”):
+1. Data are generated from a bivariate normal with covariance matrix  
+   \[
+   \Sigma = \begin{pmatrix}
+   \mathrm{Var}(X) & \mathrm{Cov}(X,Y) \\
+   \mathrm{Cov}(X,Y) & \mathrm{Var}(Y)
+   \end{pmatrix}.
+   \]  
+2. For \(\Sigma\) to be valid:  
+   - Each variance on the diagonal must be strictly positive.  
+   - The determinant must be positive, i.e.  
+     \[
+     \det(\Sigma)
+     = \mathrm{Var}(X)\,\mathrm{Var}(Y)\;-\;\bigl(\mathrm{Cov}(X,Y)\bigr)^2
+     >0.
+     \]
 
-1. Each variance on the diagonal must be strictly positive.  
-2. The determinant must be positive, i.e.
-   $$
-   \det(\Sigma)
-   = \mathrm{Var}(X)\,\mathrm{Var}(Y)\;-\;\bigl(\mathrm{Cov}(X,Y)\bigr)^2
-   >0.
-   $$
+In the app you can drive:  
+- \(\mathrm{Var}(X)=\mathit{var\_x}\),  
+- \(\mathrm{Var}(Y)=\mathit{var\_y}\),  
+- \(\mathrm{Cov}(X,Y)=\mathit{cov\_xy}\),  
+- and sample size \(n\).
 
-In the app you can drive  
-- $\mathrm{Var}(X)=\mathit{var\_x}$,  
-- $\mathrm{Var}(Y)=\mathit{var\_y}$,  
-- $\mathrm{Cov}(X,Y)=\mathit{cov\_xy}$.
+**How to use**
 
-If you pick them so that
-$$
-\mathit{var\_x}\times \mathit{var\_y}
-\;\le\;\bigl(\mathit{cov\_xy}\bigr)^2,
-$$
-then $\det(\Sigma)\le0$ and the matrix is no longer positive‐definite. In practice that means you’ve asked R to draw from a “covariance matrix” that doesn’t correspond to any real bivariate Normal distribution.
+- Move the sliders for **Var(X)**, **Var(Y)**, and **Cov(X,Y)**.  
+- The scatter plot updates with regression line; summary shows slope & intercept.
 
-**Intercept**
+**Guide for interpretation**
 
-Once we know $\widehat{\beta}_1$, we compute the **intercept**:
+- The OLS slope is approximately  
+  \[
+  \hat\beta_1 \approx \frac{\mathrm{Cov}(X,Y)}{\mathrm{Var}(X)}.
+  \]  
+- Larger covariance → steeper line; larger Var(X) → flatter line.  
 
-$$
-\widehat{\beta}_0 = \bar{\mathit{y}} - \widehat{\beta}_1 \bar{\mathit{x}}
-$$
-**Squared Residuals:** We measure prediction errors by **squaring the residuals**:
+---
 
-$$
-SSR = \sum_{i=1}^n \widehat{\varepsilon}_i^2 = \sum_{i=1}^n (\mathit{y}_i - \widehat{\beta}_0 - \widehat{\beta}_1 \mathit{x}_i)^2
-$$
+### 2) OLS β̂₁ Convergence (Monte Carlo with Endogeneity ρ)
 
-This is the **Sum of Squared Residuals (SSR)**. How do we pick $\widehat{\beta}_0$ and $\widehat{\beta}_1$ to **minimize SSR**?
+**Content**
 
-Using calculus, we find that the **minimizers** are:
+1. True model:  
+   \[
+   y = \beta_1 x + u, \qquad \mathrm{Corr}(x,u)=\rho.
+   \]  
+2. The app runs Monte Carlo replications and plots the distribution of \(\hat\beta_1\).
 
-- $\widehat{\beta}_1$: the slope formula from earlier
-- $\widehat{\beta}_0 = \bar{\mathit{y}} - \widehat{\beta}_1 \bar{\mathit{x}}$
+**How to use**
 
-So minimizing SSR gives us the **OLS estimators**.
+- Set **sample size \(n\)**, **correlation ρ**, **true slope β₁**, and **replications**.  
+- Click **Simulate**.  
 
-**The OLS Regression Line:**
+**Guide for interpretation**
 
-Once we have estimated values:
+- If \(\rho=0\): unbiased, variance shrinks as \(n↑\).  
+- If \(\rho≠0\): estimates biased even for large \(n\).
 
-$$
-\widehat{\mathit{y}}_i = \widehat{\beta}_0 + \widehat{\beta}_1 \mathit{x}_i
-$$
+---
 
-This is the **OLS regression line** — our best linear prediction for $\mathit{y}$ given $\mathit{x}$.
+### 3) Interactions & Squared Terms
 
-Once we have the **estimated coefficients** and the **OLS regression line**, we can predict the outcome $\mathit{y}$ for any sensible value of $\mathit{x}$.
+**Content**
 
-Just **plug in a value** for $\mathit{x}$, and compute the predicted $\mathit{y}$:
+1. Models:  
+   - Continuous \(z\): \(y=\beta_0+\beta_1 x+\beta_2 z+\beta_3 xz+u\).  
+   - Dummy \(z\): \(y=\beta_0+\beta_1 x+\beta_2 z+\beta_3 xz+u\).  
+   - Squared: \(y=\beta_0+(\beta_1+\beta_2)x+\beta_3 x^2+u\).  
+2. Plots marginal effects and predicted outcomes.
 
-$$
-\widehat{\mathit{y}} = \widehat{\beta}_0 + \widehat{\beta}_1 \mathit{x}
-$$
+**How to use**
 
-OLS provides the **best linear prediction** of $\mathit{y}$ in the sense that it **minimizes the prediction error** among all linear estimators.
+- Choose coefficients, select **z-type**, toggle heteroskedasticity or measurement error.  
+- Click **Resimulate**.
 
-There is always **some prediction error**, but OLS **minimizes** that error **on average**.
+**Guide for interpretation**
 
-In fact, OLS is the **Best Linear Unbiased Estimator (BLUE)** — it is the "least worst" linear prediction method for estimating $\mathit{y}$ from $\mathit{x}$.
+- Interactions: slope of \(x\) depends on \(z\).  
+- Squared: slope depends on \(x\) itself.  
 
-## Consistency vs Endogeneity 
+---
 
-What this app shows: As sample size ($n$) grows, OLS centers around the true slope if ($\operatorname{Corr}(x,u)=0$). If you dial in endogeneity ($(\rho \ne 0)$), the sampling distribution shifts: the estimator is biased/inconsistent.
+### 4) Omitted Variable Bias (Two Regressors)
 
-How to use: Choose (n), the true ($\beta_1$), and the correlation ($\rho=\operatorname{Corr}(x,u)$). Click Simulate to see the histogram of ($\hat\beta_1$) across Monte Carlo draws. The red line is the true ($\beta_1$).
+**Content**
 
-[⚡ Open App](https://felixnoth.shinyapps.io/ols_consistency/){target="_blank"}
+- True model:  
+  \[
+  y = \beta_1 x_1 + \beta_2 x_2 + \varepsilon.
+  \]  
+- Compare regression omitting \(x_2\) vs including it.
 
-[🔧 Check R Code on GitHub](https://github.com/felixnoth/Shiny-Econometrics/tree/main/apps/ols_consistency){target="_blank"} 
+**How to use**
 
-# Regression Review II
+- Adjust correlations and \(n\).  
+- Click **Simulate**.
 
-## Interaction and Nonlinearity
+**Guide for interpretation**
 
-We now visualize interaction and nonlinearity. The marginal effect of (x) on (y) in the model
-$$
-y=\beta_0+\beta_1 x+\beta_2 z+\beta_3 xz
-$$
-is $(\partial y/\partial x = \beta_1 + \beta_3 z)$: it depends on (z). If you set “(z=x)” you get a quadratic $(y=\beta_0 + (\beta_1+\beta_2)x + \beta_3 x^2)$ and $(\partial y/\partial x = \beta_1+\beta_2+2\beta_3 x)$.
+- OVB formula:  
+  \[
+  \text{Bias}(\hat\beta_1)=\beta_2 \frac{\mathrm{Cov}(x_1,x_2)}{\mathrm{Var}(x_1)}.
+  \]  
 
-This Shiny app visualizes **marginal effects** and **prediction curves** for a linear model with an interaction (and an optional squared term), and it reports the **regression output** (Intercept, $x$, $z$, $x\!:\!z$). It also lets you **inject noise** to see how statistical significance shrinks (wider CIs, smaller $t$-stats).
+---
 
-[⚡ Open App](https://felixnoth.shinyapps.io/ols_interactions/){target="_blank"}
+### 5) Omitted Variable Bias (Three Regressors)
 
-[🔧 Check R Code on GitHub](https://github.com/felixnoth/Shiny-Econometrics/tree/main/apps/ols_interactions){target="_blank"} 
+**Content**
 
-**Choose the Data-Generating Process (left panel)**
+- True model:  
+  \[
+  y = \beta_1 x_1 + \beta_2 x_2 + \beta_3 x_3 + \varepsilon.
+  \]  
+- Compare four models: full, omit \(x_2\), omit \(x_3\), omit both.
 
-- **$\beta_0$, $\beta_1$, $\beta_2$, $\beta_3$** — set the “true” coefficients used to generate the data:
-  - Model (continuous/dummy): $y = \beta_0 + \beta_1 x + \beta_2 z + \beta_3 xz + u$
-  - Model (square): $z=x$ and $y = \beta_0 + (\beta_1+\beta_2) x + \beta_3 x^2 + u$
-- **Type of $z$**  
-  - *Continuous*: $z \in [\text{Range}]$ (you choose the range)  
-  - *Dummy*: $z \in \{0,1\}$ (random 0/1)  
-  - *$z = x$ (square)*: sets $z=x$ and fits a quadratic in $x$
-- **Range of $z$** (continuous only): pick the min/max values used in the plots.
+**How to use**
 
-**Add Noise to Compress Significance**
+- Adjust correlations and coefficients.  
+- Inspect horizontal bar chart.
 
-- **Outcome noise SD ($\sigma_u$)** — increases residual variance; **bigger $\sigma_u$ $\Rightarrow$ wider CIs** and smaller $t$-stats.  
-- **Heteroskedastic noise** — if checked, noise scales with $1+|z|$, making uncertainty larger when $|z|$ is big.  
-- **Measurement error in $x$** — observed $x = x_{\text{true}} + \text{noise}$; induces **attenuation** (slopes shrink toward 0) and larger SEs.  
-  - *Tip:* combine higher $\sigma_u$ and $x$-measurement error for a clear loss of significance.
+**Guide for interpretation**
 
-**Simulation Controls**
+- Omitting \(x_3\) can bias \(\hat\beta_1\) indirectly via \(x_2\).  
 
-- **Sample size $n$** — affects precision; larger $n$ tightens CIs (holding noise fixed).  
-- **Random seed** — set for reproducibility.  
-- **Resimulate sample** — click to draw a fresh sample under your current settings.
+---
 
-**Outputs (right panel)**
+### 6) Attenuation Bias (Measurement Error)
 
-- **Top row:** Two marginal-effect plots  
+**Content**
 
-  1. **Marginal Effect of $x$ on $y$ (vs $x$)**  
-     - Theoretical curves from your *true* $\beta$’s:
-       - *Continuous/Dummy $z$:* $\frac{\partial y}{\partial x} = \beta_1 + \beta_3 z$ (horizontal lines by $z$ level)
-       - *$z = x$ (square):* $\frac{\partial y}{\partial x} = \beta_1 + \beta_2 + 2\beta_3 x$ (curved)
-  2. **Marginal Effect of $x$ on $y$ (vs $z$) with 95\% CI**  
-     - Estimated **from the fitted model on observed data** with the current sample.  
-     - Continuous: ribbon shows 95\% CI over $z$.  
-     - Dummy: points with error bars at $z=0$ and $z=1$.  
-     - Square: treats the horizontal axis as $z=x$ and shows $\hat{\beta}_x + 2\hat{\beta}_{x^2} z$ with CI.
+- True regressor: \(x^*\).  
+- Observed regressor: \(x=x^*+e\).  
+- Shows slope shrinkage due to error.
 
-- **Bottom row:** **Predicted $y$ vs $x$**  
-  - Draws the *true* DGP curves (using your $\beta$’s) for several $z$-levels (or a single curve when $z=x$).
+**How to use**
 
-- **Regression output table**  
-  - Shows the **estimated coefficients and standard errors** from the model fit on **observed** variables:  
-    - *Continuous/Dummy $z$:* `(Intercept)`, $x$, $z$, $x\!:\!z$  
-    - *$z = x$ (square):* `(Intercept)`, $x$, $x^2$ (here the interaction is represented by curvature)
+- Set **β, α, n, σₑ, σᵤ**.  
+- Toggle scatter plots for true vs observed \(x\).
 
-**Quick Demos (copy-ready)**
+**Guide for interpretation**
 
-- **Show interaction:** set $\beta_1=1$, $\beta_2=0.5$, $\beta_3=0.8$; use *Continuous* $z$, range $[-3,3]$. The ME plots reveal parallel shifts when $\beta_3=0$ and diverging lines when $\beta_3 \ne 0$.
-- **Shrink significance:** increase $\sigma_u$ to $3$–$4$ and add measurement error in $x$ (e.g., $1.0$). Watch CIs widen and $t$-stats drop in the table.
-- **Heteroskedasticity:** check the box; CI in the ME-vs-$z$ plot widens in the tails.
-
-**Interpretation Tips**
-
-- The **ME vs $x$** plot uses **true $\beta$’s** for clean pedagogy (what the DGP implies).  
-- The **ME vs $z$** plot uses the **fitted model** (what your sample and noise deliver), including **95\% CIs** that react to $n$, $\sigma_u$, heteroskedasticity, and measurement error.  
-- The **Regression table** is your go-to for **statistical significance** (coefficients, SEs, $t$-values, $p$-values). Noise controls will **compress** significance by design.
-
-**Known Limits**
-- For *$z = x$ (square)*, the app fits $y \sim x + x^2$; there is no separate $z$ or $x\!:\!z$ line in the table because the nonlinearity encodes the interaction.  
-- For *Dummy* $z$, the app keeps $z$ exactly $0/1$ (no measurement error in $z$) to avoid breaking the factor structure.
-
-# Instrumental Variables
-
-## IV Bias & Weak Instruments
-
-Explore endogeneity (ρ), instrument strength (γ₁), first stage, reduced form, and the weak-instrument F-test.
-
-[⚡ Open App](https://felixnoth.shinyapps.io/iv_bias_weak_instruments/){target="_blank"}
-
-[🔧 Check R Code on GitHub](https://github.com/felixnoth/Shiny-Econometrics/tree/main/apps/iv_bias_weak_instruments){target="_blank"} 
+- Predicted slope: \(\beta \cdot \text{Reliability}\).  
+- More measurement error → stronger bias toward zero.
