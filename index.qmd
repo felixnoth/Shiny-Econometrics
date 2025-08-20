@@ -1,6 +1,10 @@
 ---
-title: "Teaching Apps for Econometrics"
-format: html
+title: "Shiny Econometrics Apps"
+format:
+  html:
+    toc: true
+    toc-location: left   # or "right"
+    toc-title: "Contents"
 ---
 
 # Welcome
