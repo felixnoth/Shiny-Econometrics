@@ -9,3 +9,4 @@ format:
   html:
     theme: flatly
     toc: false
+    css: styles.css

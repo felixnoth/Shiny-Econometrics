@@ -1,0 +1,8 @@
+/* Make all links steelblue */
+a {
+  color: #4682B4;
+}
+
+a:hover {
+  color: #315f86; /* darker steelblue on hover */
+}

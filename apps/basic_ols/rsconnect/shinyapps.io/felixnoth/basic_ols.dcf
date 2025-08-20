@@ -1,10 +1,10 @@
-name: ols_slope
+name: basic_ols
 title:
 username: felixnoth
 account: felixnoth
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
-appId: 15235548
-bundleId: 10796859
-url: https://felixnoth.shinyapps.io/ols_slope/
+appId: 15236380
+bundleId: 10797273
+url: https://felixnoth.shinyapps.io/basic_ols/
 version: 1
