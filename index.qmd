@@ -1,0 +1,33 @@
+---
+title: "Shiny Econometrics Apps"
+format: html
+page-layout: full
+---
+
+# Welcome
+
+This site hosts interactive **Shiny apps** for my Econometrics courses.  
+They are designed to help students explore econometric concepts through simulation and visualization.  
+
+---
+
+# Available Apps
+
+## 📊 Instrumental Variables: Bias & Weak Instruments
+
+Explore the bias of OLS vs. IV under different levels of **endogeneity** and **instrument strength**.  
+The app also shows the **first stage**, **reduced form**, and the **weak instrument F-test**.
+
+👉 [Open the IV App on shinyapps.io](https://felixnoth.shinyapps.io/iv_bias_weak_instruments/)  
+
+💻 [View the app code on GitHub](https://github.com/felixnoth/Shiny-Econometrics/tree/main/apps/iv_bias_weak_instruments)
+
+---
+
+# How to Use
+
+- Click the links above to **interact with the apps online**.  
+- Or clone the repository and run any app locally in **RStudio** with:
+
+```r
+shiny::runApp("apps/iv_bias_weak_instruments")
