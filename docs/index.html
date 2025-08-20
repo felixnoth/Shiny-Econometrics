@@ -158,26 +158,30 @@ Use the sidebar in the <strong>combined Shiny app</strong> to switch between mod
 <p><strong>Content</strong></p>
 <ol type="1">
 <li>Data are generated from a bivariate normal with covariance matrix<br>
-[ =
-<span class="math display">\[\begin{pmatrix}
+<span class="math display">\[
+\Sigma = \begin{pmatrix}
 \mathrm{Var}(X) &amp; \mathrm{Cov}(X,Y) \\
 \mathrm{Cov}(X,Y) &amp; \mathrm{Var}(Y)
-\end{pmatrix}\]</span>
-. ]<br>
+\end{pmatrix}.
+\]</span><br>
 </li>
-<li>For () to be valid:
+<li>For <span class="math inline">\(\Sigma\)</span> to be valid:
 <ul>
 <li>Each variance on the diagonal must be strictly positive.<br>
 </li>
 <li>The determinant must be positive, i.e.<br>
-[ () = (X),(Y);-;((X,Y))^2 &gt;0. ]</li>
+<span class="math display">\[
+\det(\Sigma)
+= \mathrm{Var}(X)\,\mathrm{Var}(Y)\;-\;\bigl(\mathrm{Cov}(X,Y)\bigr)^2
+&gt;0.
+\]</span></li>
 </ul></li>
 </ol>
 <p>In the app you can drive:<br>
-- ((X)=),<br>
-- ((Y)=),<br>
-- ((X,Y)=),<br>
-- and sample size (n).</p>
+- <span class="math inline">\(\mathrm{Var}(X)=\mathit{var\_x}\)</span>,<br>
+- <span class="math inline">\(\mathrm{Var}(Y)=\mathit{var\_y}\)</span>,<br>
+- <span class="math inline">\(\mathrm{Cov}(X,Y)=\mathit{cov\_xy}\)</span>,<br>
+- and sample size <span class="math inline">\(n\)</span>.</p>
 <p><strong>How to use</strong></p>
 <ul>
 <li>Move the sliders for <strong>Var(X)</strong>, <strong>Var(Y)</strong>, and <strong>Cov(X,Y)</strong>.<br>
@@ -187,7 +191,9 @@ Use the sidebar in the <strong>combined Shiny app</strong> to switch between mod
 <p><strong>Guide for interpretation</strong></p>
 <ul>
 <li>The OLS slope is approximately<br>
-[ _1 . ]<br>
+<span class="math display">\[
+\hat\beta_1 \approx \frac{\mathrm{Cov}(X,Y)}{\mathrm{Var}(X)}.
+\]</span><br>
 </li>
 <li>Larger covariance → steeper line; larger Var(X) → flatter line.</li>
 </ul>
@@ -198,21 +204,23 @@ Use the sidebar in the <strong>combined Shiny app</strong> to switch between mod
 <p><strong>Content</strong></p>
 <ol type="1">
 <li>True model:<br>
-[ y = _1 x + u, (x,u)=. ]<br>
+<span class="math display">\[
+y = \beta_1 x + u, \qquad \mathrm{Corr}(x,u)=\rho.
+\]</span><br>
 </li>
-<li>The app runs Monte Carlo replications and plots the distribution of (_1).</li>
+<li>The app runs Monte Carlo replications and plots the distribution of <span class="math inline">\(\hat\beta_1\)</span>.</li>
 </ol>
 <p><strong>How to use</strong></p>
 <ul>
-<li>Set <strong>sample size (n)</strong>, <strong>correlation ρ</strong>, <strong>true slope β₁</strong>, and <strong>replications</strong>.<br>
+<li>Set <strong>sample size <span class="math inline">\(n\)</span></strong>, <strong>correlation ρ</strong>, <strong>true slope β₁</strong>, and <strong>replications</strong>.<br>
 </li>
 <li>Click <strong>Simulate</strong>.</li>
 </ul>
 <p><strong>Guide for interpretation</strong></p>
 <ul>
-<li>If (): unbiased, variance shrinks as (n↑).<br>
+<li>If <span class="math inline">\(\rho=0\)</span>: unbiased, variance shrinks as <span class="math inline">\(n↑\)</span>.<br>
 </li>
-<li>If (≠0): estimates biased even for large (n).</li>
+<li>If <span class="math inline">\(\rho≠0\)</span>: estimates biased even for large <span class="math inline">\(n\)</span>.</li>
 </ul>
 <hr>
 </section>
@@ -222,11 +230,11 @@ Use the sidebar in the <strong>combined Shiny app</strong> to switch between mod
 <ol type="1">
 <li>Models:
 <ul>
-<li>Continuous (z): (y=_0+_1 x+_2 z+_3 xz+u).<br>
+<li>Continuous <span class="math inline">\(z\)</span>: <span class="math inline">\(y=\beta_0+\beta_1 x+\beta_2 z+\beta_3 xz+u\)</span>.<br>
 </li>
-<li>Dummy (z): (y=_0+_1 x+_2 z+_3 xz+u).<br>
+<li>Dummy <span class="math inline">\(z\)</span>: <span class="math inline">\(y=\beta_0+\beta_1 x+\beta_2 z+\beta_3 xz+u\)</span>.<br>
 </li>
-<li>Squared: (y=_0+(_1+_2)x+_3 x^2+u).<br>
+<li>Squared: <span class="math inline">\(y=\beta_0+(\beta_1+\beta_2)x+\beta_3 x^2+u\)</span>.<br>
 </li>
 </ul></li>
 <li>Plots marginal effects and predicted outcomes.</li>
@@ -239,9 +247,9 @@ Use the sidebar in the <strong>combined Shiny app</strong> to switch between mod
 </ul>
 <p><strong>Guide for interpretation</strong></p>
 <ul>
-<li>Interactions: slope of (x) depends on (z).<br>
+<li>Interactions: slope of <span class="math inline">\(x\)</span> depends on <span class="math inline">\(z\)</span>.<br>
 </li>
-<li>Squared: slope depends on (x) itself.</li>
+<li>Squared: slope depends on <span class="math inline">\(x\)</span> itself.</li>
 </ul>
 <hr>
 </section>
@@ -250,20 +258,24 @@ Use the sidebar in the <strong>combined Shiny app</strong> to switch between mod
 <p><strong>Content</strong></p>
 <ul>
 <li>True model:<br>
-[ y = _1 x_1 + _2 x_2 + . ]<br>
+<span class="math display">\[
+y = \beta_1 x_1 + \beta_2 x_2 + \varepsilon.
+\]</span><br>
 </li>
-<li>Compare regression omitting (x_2) vs including it.</li>
+<li>Compare regression omitting <span class="math inline">\(x_2\)</span> vs including it.</li>
 </ul>
 <p><strong>How to use</strong></p>
 <ul>
-<li>Adjust correlations and (n).<br>
+<li>Adjust correlations and <span class="math inline">\(n\)</span>.<br>
 </li>
 <li>Click <strong>Simulate</strong>.</li>
 </ul>
 <p><strong>Guide for interpretation</strong></p>
 <ul>
 <li>OVB formula:<br>
-[ (_1)=_2 . ]</li>
+<span class="math display">\[
+\text{Bias}(\hat\beta_1)=\beta_2 \frac{\mathrm{Cov}(x_1,x_2)}{\mathrm{Var}(x_1)}.
+\]</span></li>
 </ul>
 <hr>
 </section>
@@ -272,9 +284,11 @@ Use the sidebar in the <strong>combined Shiny app</strong> to switch between mod
 <p><strong>Content</strong></p>
 <ul>
 <li>True model:<br>
-[ y = _1 x_1 + _2 x_2 + _3 x_3 + . ]<br>
+<span class="math display">\[
+y = \beta_1 x_1 + \beta_2 x_2 + \beta_3 x_3 + \varepsilon.
+\]</span><br>
 </li>
-<li>Compare four models: full, omit (x_2), omit (x_3), omit both.</li>
+<li>Compare four models: full, omit <span class="math inline">\(x_2\)</span>, omit <span class="math inline">\(x_3\)</span>, omit both.</li>
 </ul>
 <p><strong>How to use</strong></p>
 <ul>
@@ -284,7 +298,7 @@ Use the sidebar in the <strong>combined Shiny app</strong> to switch between mod
 </ul>
 <p><strong>Guide for interpretation</strong></p>
 <ul>
-<li>Omitting (x_3) can bias (_1) indirectly via (x_2).</li>
+<li>Omitting <span class="math inline">\(x_3\)</span> can bias <span class="math inline">\(\hat\beta_1\)</span> indirectly via <span class="math inline">\(x_2\)</span>.</li>
 </ul>
 <hr>
 </section>
@@ -292,9 +306,9 @@ Use the sidebar in the <strong>combined Shiny app</strong> to switch between mod
 <h3 class="anchored" data-anchor-id="attenuation-bias-measurement-error">6) Attenuation Bias (Measurement Error)</h3>
 <p><strong>Content</strong></p>
 <ul>
-<li>True regressor: (x^*).<br>
+<li>True regressor: <span class="math inline">\(x^*\)</span>.<br>
 </li>
-<li>Observed regressor: (x=x^*+e).<br>
+<li>Observed regressor: <span class="math inline">\(x=x^*+e\)</span>.<br>
 </li>
 <li>Shows slope shrinkage due to error.</li>
 </ul>
@@ -302,11 +316,11 @@ Use the sidebar in the <strong>combined Shiny app</strong> to switch between mod
 <ul>
 <li>Set <strong>β, α, n, σₑ, σᵤ</strong>.<br>
 </li>
-<li>Toggle scatter plots for true vs observed (x).</li>
+<li>Toggle scatter plots for true vs observed <span class="math inline">\(x\)</span>.</li>
 </ul>
 <p><strong>Guide for interpretation</strong></p>
 <ul>
-<li>Predicted slope: ().<br>
+<li>Predicted slope: <span class="math inline">\(\beta \cdot \text{Reliability}\)</span>.<br>
 </li>
 <li>More measurement error → stronger bias toward zero.</li>
 </ul>

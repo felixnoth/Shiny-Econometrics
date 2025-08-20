@@ -31,26 +31,26 @@ Use the sidebar in the **combined Shiny app** to switch between modules.
 **Content**
 
 1. Data are generated from a bivariate normal with covariance matrix  
-   \[
+   $$
    \Sigma = \begin{pmatrix}
    \mathrm{Var}(X) & \mathrm{Cov}(X,Y) \\
    \mathrm{Cov}(X,Y) & \mathrm{Var}(Y)
    \end{pmatrix}.
-   \]  
-2. For \(\Sigma\) to be valid:  
+   $$  
+2. For $\Sigma$ to be valid:  
    - Each variance on the diagonal must be strictly positive.  
    - The determinant must be positive, i.e.  
-     \[
+     $$
      \det(\Sigma)
      = \mathrm{Var}(X)\,\mathrm{Var}(Y)\;-\;\bigl(\mathrm{Cov}(X,Y)\bigr)^2
      >0.
-     \]
+     $$
 
 In the app you can drive:  
-- \(\mathrm{Var}(X)=\mathit{var\_x}\),  
-- \(\mathrm{Var}(Y)=\mathit{var\_y}\),  
-- \(\mathrm{Cov}(X,Y)=\mathit{cov\_xy}\),  
-- and sample size \(n\).
+- $\mathrm{Var}(X)=\mathit{var\_x}$,  
+- $\mathrm{Var}(Y)=\mathit{var\_y}$,  
+- $\mathrm{Cov}(X,Y)=\mathit{cov\_xy}$,  
+- and sample size $n$.
 
 **How to use**
 
@@ -60,9 +60,9 @@ In the app you can drive:
 **Guide for interpretation**
 
 - The OLS slope is approximately  
-  \[
+  $$
   \hat\beta_1 \approx \frac{\mathrm{Cov}(X,Y)}{\mathrm{Var}(X)}.
-  \]  
+  $$  
 - Larger covariance → steeper line; larger Var(X) → flatter line.  
 
 ---
@@ -72,20 +72,20 @@ In the app you can drive:
 **Content**
 
 1. True model:  
-   \[
+   $$
    y = \beta_1 x + u, \qquad \mathrm{Corr}(x,u)=\rho.
-   \]  
-2. The app runs Monte Carlo replications and plots the distribution of \(\hat\beta_1\).
+   $$  
+2. The app runs Monte Carlo replications and plots the distribution of $\hat\beta_1$.
 
 **How to use**
 
-- Set **sample size \(n\)**, **correlation ρ**, **true slope β₁**, and **replications**.  
+- Set **sample size $n$**, **correlation ρ**, **true slope β₁**, and **replications**.  
 - Click **Simulate**.  
 
 **Guide for interpretation**
 
-- If \(\rho=0\): unbiased, variance shrinks as \(n↑\).  
-- If \(\rho≠0\): estimates biased even for large \(n\).
+- If $\rho=0$: unbiased, variance shrinks as $n↑$.  
+- If $\rho≠0$: estimates biased even for large $n$.
 
 ---
 
@@ -94,9 +94,9 @@ In the app you can drive:
 **Content**
 
 1. Models:  
-   - Continuous \(z\): \(y=\beta_0+\beta_1 x+\beta_2 z+\beta_3 xz+u\).  
-   - Dummy \(z\): \(y=\beta_0+\beta_1 x+\beta_2 z+\beta_3 xz+u\).  
-   - Squared: \(y=\beta_0+(\beta_1+\beta_2)x+\beta_3 x^2+u\).  
+   - Continuous $z$: $y=\beta_0+\beta_1 x+\beta_2 z+\beta_3 xz+u$.  
+   - Dummy $z$: $y=\beta_0+\beta_1 x+\beta_2 z+\beta_3 xz+u$.  
+   - Squared: $y=\beta_0+(\beta_1+\beta_2)x+\beta_3 x^2+u$.  
 2. Plots marginal effects and predicted outcomes.
 
 **How to use**
@@ -106,8 +106,8 @@ In the app you can drive:
 
 **Guide for interpretation**
 
-- Interactions: slope of \(x\) depends on \(z\).  
-- Squared: slope depends on \(x\) itself.  
+- Interactions: slope of $x$ depends on $z$.  
+- Squared: slope depends on $x$ itself.  
 
 ---
 
@@ -116,22 +116,22 @@ In the app you can drive:
 **Content**
 
 - True model:  
-  \[
+  $$
   y = \beta_1 x_1 + \beta_2 x_2 + \varepsilon.
-  \]  
-- Compare regression omitting \(x_2\) vs including it.
+  $$  
+- Compare regression omitting $x_2$ vs including it.
 
 **How to use**
 
-- Adjust correlations and \(n\).  
+- Adjust correlations and $n$.  
 - Click **Simulate**.
 
 **Guide for interpretation**
 
 - OVB formula:  
-  \[
+  $$
   \text{Bias}(\hat\beta_1)=\beta_2 \frac{\mathrm{Cov}(x_1,x_2)}{\mathrm{Var}(x_1)}.
-  \]  
+  $$  
 
 ---
 
@@ -140,10 +140,10 @@ In the app you can drive:
 **Content**
 
 - True model:  
-  \[
+  $$
   y = \beta_1 x_1 + \beta_2 x_2 + \beta_3 x_3 + \varepsilon.
-  \]  
-- Compare four models: full, omit \(x_2\), omit \(x_3\), omit both.
+  $$  
+- Compare four models: full, omit $x_2$, omit $x_3$, omit both.
 
 **How to use**
 
@@ -152,7 +152,7 @@ In the app you can drive:
 
 **Guide for interpretation**
 
-- Omitting \(x_3\) can bias \(\hat\beta_1\) indirectly via \(x_2\).  
+- Omitting $x_3$ can bias $\hat\beta_1$ indirectly via $x_2$.  
 
 ---
 
@@ -160,16 +160,16 @@ In the app you can drive:
 
 **Content**
 
-- True regressor: \(x^*\).  
-- Observed regressor: \(x=x^*+e\).  
+- True regressor: $x^*$.  
+- Observed regressor: $x=x^*+e$.  
 - Shows slope shrinkage due to error.
 
 **How to use**
 
 - Set **β, α, n, σₑ, σᵤ**.  
-- Toggle scatter plots for true vs observed \(x\).
+- Toggle scatter plots for true vs observed $x$.
 
 **Guide for interpretation**
 
-- Predicted slope: \(\beta \cdot \text{Reliability}\).  
+- Predicted slope: $\beta \cdot \text{Reliability}$.  
 - More measurement error → stronger bias toward zero.
