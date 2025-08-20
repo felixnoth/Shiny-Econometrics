@@ -3,6 +3,8 @@ title: "Shiny Econometrics Apps"
 format: 
   html:
     css: styles.css
+    highlight: kate
+    df_print: paged
 
 ---
 
