@@ -1,5 +1,5 @@
 ---
-title: "Instrumental Variables – Teaching Apps"
+title: "Teaching Apps for Econometrics"
 format: html
 ---
 
