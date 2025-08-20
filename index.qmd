@@ -2,6 +2,10 @@
 title: "Shiny Econometrics Apps"
 format:
   html:
+    bootswatch: cosmo          # or any other you like: cerulean, journal, yeti…
+    primary: "#4682B4"            # steelblue
+    secondary: "#B22222"          # firebrick
+    success: "#444444"            # dark gray for body text
     toc: true
     toc_depth: 2
     toc_float: true
@@ -54,8 +58,8 @@ In the app you can drive
 
 If you pick them so that
 $$
-\mathit{var\_x}\times \mathit{var\_y}
-\;\le\;\bigl(\mathit{cov\_xy}\bigr)^2,
+\mathit{Var\_x}\times \mathit{Var\_y}
+\;\le\;\bigl(\mathit{Cov\_xy}\bigr)^2,
 $$
 then $\det(\Sigma)\le0$ and the matrix is no longer positive‐definite. In practice that means you’ve asked R to draw from a “covariance matrix” that doesn’t correspond to any real bivariate Normal distribution.
 
