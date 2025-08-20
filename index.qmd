@@ -6,13 +6,6 @@ format:
     toc_depth: 2
     toc_float: true
     number_sections: true
-    code_folding: hide
-    code_download: TRUE
-    code_download_name: "analysis.R"
-    code_summary: "Show/hide code"
-    fig_caption: true
-    highlight: kate
-    df_print: paged
 ---
 
 # Welcome
