@@ -4,7 +4,7 @@ format: html
 
 ---
 
-## 📚 Econometrics Explorer (Combined Shiny App)
+# Basic OLS
 
 This app bundles six interactive modules into one interface.  
 Use the sidebar in the **combined Shiny app** to switch between modules.
@@ -15,7 +15,7 @@ Use the sidebar in the **combined Shiny app** to switch between modules.
 
 ---
 
-### 📑 Table of Contents
+## 📑 Table of Contents
 
 1. [Covariance → Regression](#covariance--regression)  
 2. [OLS β̂₁ Convergence (Monte Carlo with Endogeneity)](#ols-β₁-convergence-monte-carlo-with-endogeneity-ρ)  
@@ -26,7 +26,7 @@ Use the sidebar in the **combined Shiny app** to switch between modules.
 
 ---
 
-### 1) Covariance → Regression
+### Covariance → Regression
 
 **Content**
 
@@ -67,7 +67,7 @@ In the app you can drive:
 
 ---
 
-### 2) OLS β̂₁ Convergence (Monte Carlo with Endogeneity ρ)
+### OLS β̂₁ Convergence (Monte Carlo with Endogeneity ρ)
 
 **Content**
 
@@ -89,7 +89,7 @@ In the app you can drive:
 
 ---
 
-### 3) Interactions & Squared Terms
+### Interactions & Squared Terms
 
 **Content**
 
@@ -111,7 +111,7 @@ In the app you can drive:
 
 ---
 
-### 4) Omitted Variable Bias (Two Regressors)
+### Omitted Variable Bias (Two Regressors)
 
 **Content**
 
@@ -135,7 +135,7 @@ In the app you can drive:
 
 ---
 
-### 5) Omitted Variable Bias (Three Regressors)
+### Omitted Variable Bias (Three Regressors)
 
 **Content**
 
@@ -156,7 +156,7 @@ In the app you can drive:
 
 ---
 
-### 6) Attenuation Bias (Measurement Error)
+### Attenuation Bias (Measurement Error)
 
 **Content**
 
