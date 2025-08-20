@@ -2,22 +2,15 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Instrumental Variables – Teaching Apps",
+    "title": "Teaching Apps for Econometrics",
     "section": "",
-    "text": "Use the links below to open the interactive apps or run locally.\n\n\nExplore endogeneity (ρ), instrument strength (γ₁), first stage, reduced form, and the weak-instrument F-test.\n\n\n 🚀 Open App      💻 Source Code \n\n\n\n\n```r install.packages(“renv”) renv::restore() shiny::runApp(“apps/iv_bias_weak_instruments”)"
+    "text": "Use the links below to open the interactive apps or run locally.\n\n\nExplore endogeneity (ρ), instrument strength (γ₁), first stage, reduced form, and the weak-instrument F-test.\n🚀 Open App\nDirect URL (copy/paste):\nhttps://felixnoth.shinyapps.io/iv_bias_weak_instruments/\nCheck R Code on my GitHub repository: https://github.com/felixnoth/Shiny-Econometrics/tree/main/apps/iv_bias_weak_instruments"
   },
   {
     "objectID": "index.html#iv-bias-weak-instruments",
     "href": "index.html#iv-bias-weak-instruments",
-    "title": "Instrumental Variables – Teaching Apps",
+    "title": "Teaching Apps for Econometrics",
     "section": "",
-    "text": "Explore endogeneity (ρ), instrument strength (γ₁), first stage, reduced form, and the weak-instrument F-test.\n\n\n 🚀 Open App      💻 Source Code"
-  },
-  {
-    "objectID": "index.html#run-locally-reproducible",
-    "href": "index.html#run-locally-reproducible",
-    "title": "Instrumental Variables – Teaching Apps",
-    "section": "",
-    "text": "```r install.packages(“renv”) renv::restore() shiny::runApp(“apps/iv_bias_weak_instruments”)"
+    "text": "Explore endogeneity (ρ), instrument strength (γ₁), first stage, reduced form, and the weak-instrument F-test.\n🚀 Open App\nDirect URL (copy/paste):\nhttps://felixnoth.shinyapps.io/iv_bias_weak_instruments/\nCheck R Code on my GitHub repository: https://github.com/felixnoth/Shiny-Econometrics/tree/main/apps/iv_bias_weak_instruments"
   }
 ]
