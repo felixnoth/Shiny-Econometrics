@@ -15,10 +15,3 @@ Explore endogeneity (ρ), instrument strength (γ₁), first stage, reduced form
 
 Direct URL (copy/paste):  
 <https://felixnoth.shinyapps.io/iv_bias_weak_instruments/>
-
-## Run locally (reproducible)
-
-```r
-install.packages("renv")
-renv::restore()
-shiny::runApp("apps/iv_bias_weak_instruments")
