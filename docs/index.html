@@ -114,6 +114,10 @@ window.Quarto = {
   <li><a href="#regression-review-i" id="toc-regression-review-i" class="nav-link" data-scroll-target="#regression-review-i">Regression Review I</a>
   <ul class="collapse">
   <li><a href="#ordinary-least-squares-ols-slope-estimate" id="toc-ordinary-least-squares-ols-slope-estimate" class="nav-link" data-scroll-target="#ordinary-least-squares-ols-slope-estimate">Ordinary Least Squares (OLS) Slope Estimate</a></li>
+  <li><a href="#consistency-vs-endogeneity" id="toc-consistency-vs-endogeneity" class="nav-link" data-scroll-target="#consistency-vs-endogeneity">Consistency vs Endogeneity</a></li>
+  </ul></li>
+  <li><a href="#instrumental-variables" id="toc-instrumental-variables" class="nav-link" data-scroll-target="#instrumental-variables">Instrumental Variables</a>
+  <ul class="collapse">
   <li><a href="#iv-bias-weak-instruments" id="toc-iv-bias-weak-instruments" class="nav-link" data-scroll-target="#iv-bias-weak-instruments">IV Bias &amp; Weak Instruments</a></li>
   </ul></li>
   </ul>
@@ -205,6 +209,14 @@ SSR = \sum_{i=1}^n \widehat{\varepsilon}_i^2 = \sum_{i=1}^n (\mathit{y}_i - \wid
 <p>There is always <strong>some prediction error</strong>, but OLS <strong>minimizes</strong> that error <strong>on average</strong>.</p>
 <p>In fact, OLS is the <strong>Best Linear Unbiased Estimator (BLUE)</strong> — it is the “least worst” linear prediction method for estimating <span class="math inline">\(\mathit{y}\)</span> from <span class="math inline">\(\mathit{x}\)</span>.</p>
 </section>
+<section id="consistency-vs-endogeneity" class="level2">
+<h2 class="anchored" data-anchor-id="consistency-vs-endogeneity">Consistency vs Endogeneity</h2>
+<p><a href="https://felixnoth.shinyapps.io/ols_consistency/" target="_blank">⚡ Open App</a></p>
+<p><a href="https://github.com/felixnoth/Shiny-Econometrics/tree/main/apps/ols_consistency" target="_blank">🔧 Check R Code on GitHub</a></p>
+</section>
+</section>
+<section id="instrumental-variables" class="level1">
+<h1>Instrumental Variables</h1>
 <section id="iv-bias-weak-instruments" class="level2">
 <h2 class="anchored" data-anchor-id="iv-bias-weak-instruments">IV Bias &amp; Weak Instruments</h2>
 <p>Explore endogeneity (ρ), instrument strength (γ₁), first stage, reduced form, and the weak-instrument F-test.</p>

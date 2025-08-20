@@ -15,6 +15,7 @@ Use the links below to open the interactive apps.
 # Regression Review I
 
 ## Ordinary Least Squares (OLS) Slope Estimate 
+
 This is the **Ordinary Least Squares (OLS) slope estimate**.
 
 $$
@@ -97,6 +98,14 @@ OLS provides the **best linear prediction** of $\mathit{y}$ in the sense that it
 There is always **some prediction error**, but OLS **minimizes** that error **on average**.
 
 In fact, OLS is the **Best Linear Unbiased Estimator (BLUE)** — it is the "least worst" linear prediction method for estimating $\mathit{y}$ from $\mathit{x}$.
+
+## Consistency vs Endogeneity 
+
+[⚡ Open App](https://felixnoth.shinyapps.io/ols_consistency/){target="_blank"}
+
+[🔧 Check R Code on GitHub](https://github.com/felixnoth/Shiny-Econometrics/tree/main/apps/ols_consistency){target="_blank"} 
+
+# Instrumental Variables
 
 ## IV Bias & Weak Instruments
 

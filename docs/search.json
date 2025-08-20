@@ -2,15 +2,22 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Teaching Apps for Econometrics",
+    "title": "Shiny Econometrics Apps",
     "section": "",
-    "text": "Use the links below to open the interactive apps or run locally.\n\n\nExplore endogeneity (ρ), instrument strength (γ₁), first stage, reduced form, and the weak-instrument F-test.\n🚀 Open App\nDirect URL (copy/paste):\nhttps://felixnoth.shinyapps.io/iv_bias_weak_instruments/\nCheck R Code on my GitHub repository: https://github.com/felixnoth/Shiny-Econometrics/tree/main/apps/iv_bias_weak_instruments"
+    "text": "Use the links below to open the interactive apps."
+  },
+  {
+    "objectID": "index.html#ordinary-least-squares-ols-slope-estimate",
+    "href": "index.html#ordinary-least-squares-ols-slope-estimate",
+    "title": "Shiny Econometrics Apps",
+    "section": "Ordinary Least Squares (OLS) Slope Estimate",
+    "text": "Ordinary Least Squares (OLS) Slope Estimate\nThis is the Ordinary Least Squares (OLS) slope estimate.\n\\[\n\\widehat{\\beta}_1 = \\frac{\\sum_{i=1}^n (\\mathit{x}_i - \\bar{\\mathit{x}})(\\mathit{y}_i - \\bar{\\mathit{y}})}{\\sum_{i=1}^n (\\mathit{x}_i - \\bar{\\mathit{x}})^2}\n\\] ⚡ Open App\n🔧 Check R Code on GitHub\nWhen Is OLS Defined?\nWe can compute \\(\\widehat{\\beta}_1\\) as long as the sample variance of \\(\\mathit{x}\\) is not 0.\nIf all individuals have the same \\(\\mathit{x}\\) (e.g., same schooling), the slope cannot be identified.\nA covariance matrix \\(\\Sigma\\) must satisfy two things to be valid (“positive‐definite”):\n\nEach variance on the diagonal must be strictly positive.\n\nThe determinant must be positive, i.e. \\[\n\\det(\\Sigma)\n= \\mathrm{Var}(X)\\,\\mathrm{Var}(Y)\\;-\\;\\bigl(\\mathrm{Cov}(X,Y)\\bigr)^2\n&gt;0.\n\\]\n\nIn the app you can drive\n- \\(\\mathrm{Var}(X)=\\mathit{var\\_x}\\),\n- \\(\\mathrm{Var}(Y)=\\mathit{var\\_y}\\),\n- \\(\\mathrm{Cov}(X,Y)=\\mathit{cov\\_xy}\\).\nIf you pick them so that \\[\n\\mathit{Var\\_x}\\times \\mathit{Var\\_y}\n\\;\\le\\;\\bigl(\\mathit{Cov\\_xy}\\bigr)^2,\n\\] then \\(\\det(\\Sigma)\\le0\\) and the matrix is no longer positive‐definite. In practice that means you’ve asked R to draw from a “covariance matrix” that doesn’t correspond to any real bivariate Normal distribution.\nIntercept\nOnce we know \\(\\widehat{\\beta}_1\\), we compute the intercept:\n\\[\n\\widehat{\\beta}_0 = \\bar{\\mathit{y}} - \\widehat{\\beta}_1 \\bar{\\mathit{x}}\n\\] Squared Residuals: We measure prediction errors by squaring the residuals:\n\\[\nSSR = \\sum_{i=1}^n \\widehat{\\varepsilon}_i^2 = \\sum_{i=1}^n (\\mathit{y}_i - \\widehat{\\beta}_0 - \\widehat{\\beta}_1 \\mathit{x}_i)^2\n\\]\nThis is the Sum of Squared Residuals (SSR). How do we pick \\(\\widehat{\\beta}_0\\) and \\(\\widehat{\\beta}_1\\) to minimize SSR?\nUsing calculus, we find that the minimizers are:\n\n\\(\\widehat{\\beta}_1\\): the slope formula from earlier\n\\(\\widehat{\\beta}_0 = \\bar{\\mathit{y}} - \\widehat{\\beta}_1 \\bar{\\mathit{x}}\\)\n\nSo minimizing SSR gives us the OLS estimators.\nThe OLS Regression Line:\nOnce we have estimated values:\n\\[\n\\widehat{\\mathit{y}}_i = \\widehat{\\beta}_0 + \\widehat{\\beta}_1 \\mathit{x}_i\n\\]\nThis is the OLS regression line — our best linear prediction for \\(\\mathit{y}\\) given \\(\\mathit{x}\\).\nOnce we have the estimated coefficients and the OLS regression line, we can predict the outcome \\(\\mathit{y}\\) for any sensible value of \\(\\mathit{x}\\).\nJust plug in a value for \\(\\mathit{x}\\), and compute the predicted \\(\\mathit{y}\\):\n\\[\n\\widehat{\\mathit{y}} = \\widehat{\\beta}_0 + \\widehat{\\beta}_1 \\mathit{x}\n\\]\nOLS provides the best linear prediction of \\(\\mathit{y}\\) in the sense that it minimizes the prediction error among all linear estimators.\nThere is always some prediction error, but OLS minimizes that error on average.\nIn fact, OLS is the Best Linear Unbiased Estimator (BLUE) — it is the “least worst” linear prediction method for estimating \\(\\mathit{y}\\) from \\(\\mathit{x}\\)."
   },
   {
     "objectID": "index.html#iv-bias-weak-instruments",
     "href": "index.html#iv-bias-weak-instruments",
-    "title": "Teaching Apps for Econometrics",
-    "section": "",
-    "text": "Explore endogeneity (ρ), instrument strength (γ₁), first stage, reduced form, and the weak-instrument F-test.\n🚀 Open App\nDirect URL (copy/paste):\nhttps://felixnoth.shinyapps.io/iv_bias_weak_instruments/\nCheck R Code on my GitHub repository: https://github.com/felixnoth/Shiny-Econometrics/tree/main/apps/iv_bias_weak_instruments"
+    "title": "Shiny Econometrics Apps",
+    "section": "IV Bias & Weak Instruments",
+    "text": "IV Bias & Weak Instruments\nExplore endogeneity (ρ), instrument strength (γ₁), first stage, reduced form, and the weak-instrument F-test.\n⚡ Open App\n🔧 Check R Code on GitHub"
   }
 ]
