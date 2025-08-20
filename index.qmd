@@ -15,3 +15,6 @@ Explore endogeneity (ρ), instrument strength (γ₁), first stage, reduced form
 
 Direct URL (copy/paste):  
 <https://felixnoth.shinyapps.io/iv_bias_weak_instruments/>
+
+Check R Code on my GitHub repository: 
+<https://github.com/felixnoth/Shiny-Econometrics/tree/main/apps/iv_bias_weak_instruments>
