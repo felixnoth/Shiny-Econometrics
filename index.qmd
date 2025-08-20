@@ -2,10 +2,6 @@
 title: "Shiny Econometrics Apps"
 format:
   html:
-    bootswatch: cosmo          # or any other you like: cerulean, journal, yeti…
-    primary: "#4682B4"            # steelblue
-    secondary: "#B22222"          # firebrick
-    success: "#444444"            # dark gray for body text
     toc: true
     toc_depth: 2
     toc_float: true
