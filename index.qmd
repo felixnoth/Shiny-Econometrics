@@ -15,19 +15,20 @@ They are designed to help students explore econometric concepts through simulati
 
 ## 📊 Instrumental Variables: Bias & Weak Instruments
 
-Explore the bias of OLS vs. IV under different levels of **endogeneity** and **instrument strength**.  
-The app also shows the **first stage**, **reduced form**, and the **weak instrument F-test**.
+Explore endogeneity (ρ), instrument strength (γ₁), first stage, reduced form, and the weak-instrument F-test.
 
-👉 [Open the IV App on shinyapps.io](https://felixnoth.shinyapps.io/iv_bias_weak_instruments/)  
-
-💻 [View the app code on GitHub](https://github.com/felixnoth/Shiny-Econometrics/tree/main/apps/iv_bias_weak_instruments)
+<p>
+<a href="https://felixnoth.shinyapps.io/iv_bias_weak_instruments/" target="_blank"
+   style="background:#0b6cff;color:#fff;padding:.55rem .9rem;border-radius:10px;text-decoration:none;font-weight:600;">
+  Open App
+</a>
+&nbsp; &nbsp;
+<a href="https://github.com/felixnoth/Shiny-Econometrics/tree/main/apps/iv_bias_weak_instruments" target="_blank">
+  Source Code
+</a>
+</p>
 
 ---
-
-# How to Use
-
-- Click the links above to **interact with the apps online**.  
-- Or clone the repository and run any app locally in **RStudio** with:
 
 ```r
 shiny::runApp("apps/iv_bias_weak_instruments")
