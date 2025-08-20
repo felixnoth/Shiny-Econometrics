@@ -2,15 +2,22 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Shiny Econometrics Apps",
+    "title": "Instrumental Variables – Teaching Apps",
     "section": "",
-    "text": "Welcome!\nThis site collects interactive Shiny apps I use in my econometrics teaching.\n\n\nExplore endogeneity (ρ), instrument strength (γ₁), first stage, reduced form, and the weak-instrument F-test.\n\n 🚀 Open App      💻 Source Code"
+    "text": "Use the links below to open the interactive apps or run locally.\n\n\nExplore endogeneity (ρ), instrument strength (γ₁), first stage, reduced form, and the weak-instrument F-test.\n\n\n 🚀 Open App      💻 Source Code \n\n\n\n\n```r install.packages(“renv”) renv::restore() shiny::runApp(“apps/iv_bias_weak_instruments”)"
   },
   {
     "objectID": "index.html#iv-bias-weak-instruments",
     "href": "index.html#iv-bias-weak-instruments",
-    "title": "Shiny Econometrics Apps",
+    "title": "Instrumental Variables – Teaching Apps",
     "section": "",
-    "text": "Explore endogeneity (ρ), instrument strength (γ₁), first stage, reduced form, and the weak-instrument F-test.\n\n 🚀 Open App      💻 Source Code"
+    "text": "Explore endogeneity (ρ), instrument strength (γ₁), first stage, reduced form, and the weak-instrument F-test.\n\n\n 🚀 Open App      💻 Source Code"
+  },
+  {
+    "objectID": "index.html#run-locally-reproducible",
+    "href": "index.html#run-locally-reproducible",
+    "title": "Instrumental Variables – Teaching Apps",
+    "section": "",
+    "text": "```r install.packages(“renv”) renv::restore() shiny::runApp(“apps/iv_bias_weak_instruments”)"
   }
 ]

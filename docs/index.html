@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Shiny Econometrics Apps</title>
+<title>Instrumental Variables – Teaching Apps – Shiny Econometrics Apps</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -82,7 +82,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Shiny Econometrics Apps</h1>
+<h1 class="title">Instrumental Variables – Teaching Apps</h1>
 </div>
 
 
@@ -99,16 +99,20 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="shiny-apps-for-econometrics" class="level1">
-<h1>📊 Shiny Apps for Econometrics</h1>
-<p>Welcome!<br>
-This site collects interactive <strong>Shiny apps</strong> I use in my econometrics teaching.</p>
+<section id="welcome" class="level1">
+<h1>Welcome</h1>
+<p>Use the links below to open the interactive apps or run locally.</p>
 <section id="iv-bias-weak-instruments" class="level2">
 <h2 class="anchored" data-anchor-id="iv-bias-weak-instruments">IV Bias &amp; Weak Instruments</h2>
 <p>Explore endogeneity (ρ), instrument strength (γ₁), first stage, reduced form, and the weak-instrument F-test.</p>
 <p>
-<a href="https://felixnoth.shinyapps.io/iv-bias-weak-instruments/" target="_blank" style="background:#0b6cff;color:#fff;padding:.6rem 1rem;border-radius:10px;text-decoration:none;font-weight:600;display:inline-block;"> 🚀 Open App </a> &nbsp;&nbsp; <a href="https://github.com/felixnoth/Shiny-Econometrics/tree/main/apps/iv_bias_weak_instruments" target="_blank" style="border:1px solid #0b6cff;color:#0b6cff;padding:.55rem .9rem;border-radius:10px;text-decoration:none;font-weight:600;display:inline-block;"> 💻 Source Code </a>
+<!-- LIVE APP: uses UNDERSCORES because that's your deployed path -->
+<a href="https://felixnoth.shinyapps.io/iv_bias_weak_instruments/" target="_blank" style="background:#0b6cff;color:#fff;padding:.6rem 1rem;border-radius:10px;text-decoration:none;font-weight:600;display:inline-block;"> 🚀 Open App </a> &nbsp;&nbsp; <a href="https://github.com/felixnoth/Shiny-Econometrics/tree/main/apps/iv_bias_weak_instruments" target="_blank" style="border:1px solid #0b6cff;color:#0b6cff;padding:.55rem .9rem;border-radius:10px;text-decoration:none;font-weight:600;display:inline-block;"> 💻 Source Code </a>
 </p>
+</section>
+<section id="run-locally-reproducible" class="level2">
+<h2 class="anchored" data-anchor-id="run-locally-reproducible">Run locally (reproducible)</h2>
+<p>```r install.packages(“renv”) renv::restore() shiny::runApp(“apps/iv_bias_weak_instruments”)</p>
 
 
 </section>

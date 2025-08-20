@@ -1,19 +1,19 @@
 ---
-title: "Shiny Econometrics Apps"
+title: "Instrumental Variables – Teaching Apps"
 format: html
 ---
 
-# 📊 Shiny Apps for Econometrics
+# Welcome
 
-Welcome!  
-This site collects interactive **Shiny apps** I use in my econometrics teaching.
+Use the links below to open the interactive apps or run locally.
 
 ## IV Bias & Weak Instruments
 
 Explore endogeneity (ρ), instrument strength (γ₁), first stage, reduced form, and the weak-instrument F-test.
 
 <p>
-  <a href="https://felixnoth.shinyapps.io/iv-bias-weak-instruments/" target="_blank"
+  <!-- LIVE APP: uses UNDERSCORES because that's your deployed path -->
+  <a href="https://felixnoth.shinyapps.io/iv_bias_weak_instruments/" target="_blank"
      style="background:#0b6cff;color:#fff;padding:.6rem 1rem;border-radius:10px;text-decoration:none;font-weight:600;display:inline-block;">
     🚀 Open App
   </a>
@@ -23,3 +23,10 @@ Explore endogeneity (ρ), instrument strength (γ₁), first stage, reduced form
     💻 Source Code
   </a>
 </p>
+
+## Run locally (reproducible)
+
+```r
+install.packages("renv")
+renv::restore()
+shiny::runApp("apps/iv_bias_weak_instruments")
