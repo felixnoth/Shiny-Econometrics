@@ -1,19 +1,11 @@
-# 1) Rename the file (if it’s misspelled)
-mv _quatro.yml _quarto.yml
-
-# 2) Overwrite with valid YAML (no trailing YAML token)
-cat > _quarto.yml <<'YML'
 project:
   type: website
   output-dir: docs
+
 website:
   title: "Shiny Econometrics Apps"
-  navbar:
-    left:
-      - text: Home
-        href: index.qmd
+
 format:
   html:
     theme: flatly
     toc: false
-YML

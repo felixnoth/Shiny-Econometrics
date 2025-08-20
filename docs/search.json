@@ -1,0 +1,16 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Shiny Econometrics Apps",
+    "section": "",
+    "text": "Welcome!\nThis site collects interactive Shiny apps I use in my econometrics teaching.\n\n\nExplore endogeneity (ρ), instrument strength (γ₁), first stage, reduced form, and the weak-instrument F-test.\n\n 🚀 Open App      💻 Source Code"
+  },
+  {
+    "objectID": "index.html#iv-bias-weak-instruments",
+    "href": "index.html#iv-bias-weak-instruments",
+    "title": "Shiny Econometrics Apps",
+    "section": "",
+    "text": "Explore endogeneity (ρ), instrument strength (γ₁), first stage, reduced form, and the weak-instrument F-test.\n\n 🚀 Open App      💻 Source Code"
+  }
+]
