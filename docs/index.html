@@ -116,6 +116,10 @@ window.Quarto = {
   <li><a href="#ordinary-least-squares-ols-slope-estimate" id="toc-ordinary-least-squares-ols-slope-estimate" class="nav-link" data-scroll-target="#ordinary-least-squares-ols-slope-estimate">Ordinary Least Squares (OLS) Slope Estimate</a></li>
   <li><a href="#consistency-vs-endogeneity" id="toc-consistency-vs-endogeneity" class="nav-link" data-scroll-target="#consistency-vs-endogeneity">Consistency vs Endogeneity</a></li>
   </ul></li>
+  <li><a href="#regression-review-ii" id="toc-regression-review-ii" class="nav-link" data-scroll-target="#regression-review-ii">Regression Review II</a>
+  <ul class="collapse">
+  <li><a href="#interaction-and-nonlinearity" id="toc-interaction-and-nonlinearity" class="nav-link" data-scroll-target="#interaction-and-nonlinearity">Interaction and Nonlinearity</a></li>
+  </ul></li>
   <li><a href="#instrumental-variables" id="toc-instrumental-variables" class="nav-link" data-scroll-target="#instrumental-variables">Instrumental Variables</a>
   <ul class="collapse">
   <li><a href="#iv-bias-weak-instruments" id="toc-iv-bias-weak-instruments" class="nav-link" data-scroll-target="#iv-bias-weak-instruments">IV Bias &amp; Weak Instruments</a></li>
@@ -176,8 +180,8 @@ window.Quarto = {
 - <span class="math inline">\(\mathrm{Var}(Y)=\mathit{var\_y}\)</span>,<br>
 - <span class="math inline">\(\mathrm{Cov}(X,Y)=\mathit{cov\_xy}\)</span>.</p>
 <p>If you pick them so that <span class="math display">\[
-\mathit{Var\_x}\times \mathit{Var\_y}
-\;\le\;\bigl(\mathit{Cov\_xy}\bigr)^2,
+\mathit{var\_x}\times \mathit{var\_y}
+\;\le\;\bigl(\mathit{cov\_xy}\bigr)^2,
 \]</span> then <span class="math inline">\(\det(\Sigma)\le0\)</span> and the matrix is no longer positive‐definite. In practice that means you’ve asked R to draw from a “covariance matrix” that doesn’t correspond to any real bivariate Normal distribution.</p>
 <p><strong>Intercept</strong></p>
 <p>Once we know <span class="math inline">\(\widehat{\beta}_1\)</span>, we compute the <strong>intercept</strong>:</p>
@@ -211,8 +215,111 @@ SSR = \sum_{i=1}^n \widehat{\varepsilon}_i^2 = \sum_{i=1}^n (\mathit{y}_i - \wid
 </section>
 <section id="consistency-vs-endogeneity" class="level2">
 <h2 class="anchored" data-anchor-id="consistency-vs-endogeneity">Consistency vs Endogeneity</h2>
+<p>What this app shows: As sample size (<span class="math inline">\(n\)</span>) grows, OLS centers around the true slope if (<span class="math inline">\(\operatorname{Corr}(x,u)=0\)</span>). If you dial in endogeneity (<span class="math inline">\((\rho \ne 0)\)</span>), the sampling distribution shifts: the estimator is biased/inconsistent.</p>
+<p>How to use: Choose (n), the true (<span class="math inline">\(\beta_1\)</span>), and the correlation (<span class="math inline">\(\rho=\operatorname{Corr}(x,u)\)</span>). Click Simulate to see the histogram of (<span class="math inline">\(\hat\beta_1\)</span>) across Monte Carlo draws. The red line is the true (<span class="math inline">\(\beta_1\)</span>).</p>
 <p><a href="https://felixnoth.shinyapps.io/ols_consistency/" target="_blank">⚡ Open App</a></p>
 <p><a href="https://github.com/felixnoth/Shiny-Econometrics/tree/main/apps/ols_consistency" target="_blank">🔧 Check R Code on GitHub</a></p>
+</section>
+</section>
+<section id="regression-review-ii" class="level1">
+<h1>Regression Review II</h1>
+<section id="interaction-and-nonlinearity" class="level2">
+<h2 class="anchored" data-anchor-id="interaction-and-nonlinearity">Interaction and Nonlinearity</h2>
+<p>We now visualize interaction and nonlinearity. The marginal effect of (x) on (y) in the model <span class="math display">\[
+y=\beta_0+\beta_1 x+\beta_2 z+\beta_3 xz
+\]</span> is <span class="math inline">\((\partial y/\partial x = \beta_1 + \beta_3 z)\)</span>: it depends on (z). If you set “(z=x)” you get a quadratic <span class="math inline">\((y=\beta_0 + (\beta_1+\beta_2)x + \beta_3 x^2)\)</span> and <span class="math inline">\((\partial y/\partial x = \beta_1+\beta_2+2\beta_3 x)\)</span>.</p>
+<p>This Shiny app visualizes <strong>marginal effects</strong> and <strong>prediction curves</strong> for a linear model with an interaction (and an optional squared term), and it reports the <strong>regression output</strong> (Intercept, <span class="math inline">\(x\)</span>, <span class="math inline">\(z\)</span>, <span class="math inline">\(x\!:\!z\)</span>). It also lets you <strong>inject noise</strong> to see how statistical significance shrinks (wider CIs, smaller <span class="math inline">\(t\)</span>-stats).</p>
+<p><a href="https://felixnoth.shinyapps.io/ols_interactions/" target="_blank">⚡ Open App</a></p>
+<p><a href="https://github.com/felixnoth/Shiny-Econometrics/tree/main/apps/ols_interactions" target="_blank">🔧 Check R Code on GitHub</a></p>
+<p><strong>Choose the Data-Generating Process (left panel)</strong></p>
+<ul>
+<li><strong><span class="math inline">\(\beta_0\)</span>, <span class="math inline">\(\beta_1\)</span>, <span class="math inline">\(\beta_2\)</span>, <span class="math inline">\(\beta_3\)</span></strong> — set the “true” coefficients used to generate the data:
+<ul>
+<li>Model (continuous/dummy): <span class="math inline">\(y = \beta_0 + \beta_1 x + \beta_2 z + \beta_3 xz + u\)</span></li>
+<li>Model (square): <span class="math inline">\(z=x\)</span> and <span class="math inline">\(y = \beta_0 + (\beta_1+\beta_2) x + \beta_3 x^2 + u\)</span></li>
+</ul></li>
+<li><strong>Type of <span class="math inline">\(z\)</span></strong>
+<ul>
+<li><em>Continuous</em>: <span class="math inline">\(z \in [\text{Range}]\)</span> (you choose the range)<br>
+</li>
+<li><em>Dummy</em>: <span class="math inline">\(z \in \{0,1\}\)</span> (random 0/1)<br>
+</li>
+<li><em><span class="math inline">\(z = x\)</span> (square)</em>: sets <span class="math inline">\(z=x\)</span> and fits a quadratic in <span class="math inline">\(x\)</span></li>
+</ul></li>
+<li><strong>Range of <span class="math inline">\(z\)</span></strong> (continuous only): pick the min/max values used in the plots.</li>
+</ul>
+<p><strong>Add Noise to Compress Significance</strong></p>
+<ul>
+<li><strong>Outcome noise SD (<span class="math inline">\(\sigma_u\)</span>)</strong> — increases residual variance; <strong>bigger <span class="math inline">\(\sigma_u\)</span> <span class="math inline">\(\Rightarrow\)</span> wider CIs</strong> and smaller <span class="math inline">\(t\)</span>-stats.<br>
+</li>
+<li><strong>Heteroskedastic noise</strong> — if checked, noise scales with <span class="math inline">\(1+|z|\)</span>, making uncertainty larger when <span class="math inline">\(|z|\)</span> is big.<br>
+</li>
+<li><strong>Measurement error in <span class="math inline">\(x\)</span></strong> — observed <span class="math inline">\(x = x_{\text{true}} + \text{noise}\)</span>; induces <strong>attenuation</strong> (slopes shrink toward 0) and larger SEs.
+<ul>
+<li><em>Tip:</em> combine higher <span class="math inline">\(\sigma_u\)</span> and <span class="math inline">\(x\)</span>-measurement error for a clear loss of significance.</li>
+</ul></li>
+</ul>
+<p><strong>Simulation Controls</strong></p>
+<ul>
+<li><strong>Sample size <span class="math inline">\(n\)</span></strong> — affects precision; larger <span class="math inline">\(n\)</span> tightens CIs (holding noise fixed).<br>
+</li>
+<li><strong>Random seed</strong> — set for reproducibility.<br>
+</li>
+<li><strong>Resimulate sample</strong> — click to draw a fresh sample under your current settings.</li>
+</ul>
+<p><strong>Outputs (right panel)</strong></p>
+<ul>
+<li><p><strong>Top row:</strong> Two marginal-effect plots</p>
+<ol type="1">
+<li><strong>Marginal Effect of <span class="math inline">\(x\)</span> on <span class="math inline">\(y\)</span> (vs <span class="math inline">\(x\)</span>)</strong>
+<ul>
+<li>Theoretical curves from your <em>true</em> <span class="math inline">\(\beta\)</span>’s:
+<ul>
+<li><em>Continuous/Dummy <span class="math inline">\(z\)</span>:</em> <span class="math inline">\(\frac{\partial y}{\partial x} = \beta_1 + \beta_3 z\)</span> (horizontal lines by <span class="math inline">\(z\)</span> level)</li>
+<li><em><span class="math inline">\(z = x\)</span> (square):</em> <span class="math inline">\(\frac{\partial y}{\partial x} = \beta_1 + \beta_2 + 2\beta_3 x\)</span> (curved)</li>
+</ul></li>
+</ul></li>
+<li><strong>Marginal Effect of <span class="math inline">\(x\)</span> on <span class="math inline">\(y\)</span> (vs <span class="math inline">\(z\)</span>) with 95% CI</strong>
+<ul>
+<li>Estimated <strong>from the fitted model on observed data</strong> with the current sample.<br>
+</li>
+<li>Continuous: ribbon shows 95% CI over <span class="math inline">\(z\)</span>.<br>
+</li>
+<li>Dummy: points with error bars at <span class="math inline">\(z=0\)</span> and <span class="math inline">\(z=1\)</span>.<br>
+</li>
+<li>Square: treats the horizontal axis as <span class="math inline">\(z=x\)</span> and shows <span class="math inline">\(\hat{\beta}_x + 2\hat{\beta}_{x^2} z\)</span> with CI.</li>
+</ul></li>
+</ol></li>
+<li><p><strong>Bottom row:</strong> <strong>Predicted <span class="math inline">\(y\)</span> vs <span class="math inline">\(x\)</span></strong></p>
+<ul>
+<li>Draws the <em>true</em> DGP curves (using your <span class="math inline">\(\beta\)</span>’s) for several <span class="math inline">\(z\)</span>-levels (or a single curve when <span class="math inline">\(z=x\)</span>).</li>
+</ul></li>
+<li><p><strong>Regression output table</strong></p>
+<ul>
+<li>Shows the <strong>estimated coefficients and standard errors</strong> from the model fit on <strong>observed</strong> variables:
+<ul>
+<li><em>Continuous/Dummy <span class="math inline">\(z\)</span>:</em> <code>(Intercept)</code>, <span class="math inline">\(x\)</span>, <span class="math inline">\(z\)</span>, <span class="math inline">\(x\!:\!z\)</span><br>
+</li>
+<li><em><span class="math inline">\(z = x\)</span> (square):</em> <code>(Intercept)</code>, <span class="math inline">\(x\)</span>, <span class="math inline">\(x^2\)</span> (here the interaction is represented by curvature)</li>
+</ul></li>
+</ul></li>
+</ul>
+<p><strong>Quick Demos (copy-ready)</strong></p>
+<ul>
+<li><strong>Show interaction:</strong> set <span class="math inline">\(\beta_1=1\)</span>, <span class="math inline">\(\beta_2=0.5\)</span>, <span class="math inline">\(\beta_3=0.8\)</span>; use <em>Continuous</em> <span class="math inline">\(z\)</span>, range <span class="math inline">\([-3,3]\)</span>. The ME plots reveal parallel shifts when <span class="math inline">\(\beta_3=0\)</span> and diverging lines when <span class="math inline">\(\beta_3 \ne 0\)</span>.</li>
+<li><strong>Shrink significance:</strong> increase <span class="math inline">\(\sigma_u\)</span> to <span class="math inline">\(3\)</span>–<span class="math inline">\(4\)</span> and add measurement error in <span class="math inline">\(x\)</span> (e.g., <span class="math inline">\(1.0\)</span>). Watch CIs widen and <span class="math inline">\(t\)</span>-stats drop in the table.</li>
+<li><strong>Heteroskedasticity:</strong> check the box; CI in the ME-vs-<span class="math inline">\(z\)</span> plot widens in the tails.</li>
+</ul>
+<p><strong>Interpretation Tips</strong></p>
+<ul>
+<li>The <strong>ME vs <span class="math inline">\(x\)</span></strong> plot uses <strong>true <span class="math inline">\(\beta\)</span>’s</strong> for clean pedagogy (what the DGP implies).<br>
+</li>
+<li>The <strong>ME vs <span class="math inline">\(z\)</span></strong> plot uses the <strong>fitted model</strong> (what your sample and noise deliver), including <strong>95% CIs</strong> that react to <span class="math inline">\(n\)</span>, <span class="math inline">\(\sigma_u\)</span>, heteroskedasticity, and measurement error.<br>
+</li>
+<li>The <strong>Regression table</strong> is your go-to for <strong>statistical significance</strong> (coefficients, SEs, <span class="math inline">\(t\)</span>-values, <span class="math inline">\(p\)</span>-values). Noise controls will <strong>compress</strong> significance by design.</li>
+</ul>
+<p><strong>Known Limits</strong> - For <em><span class="math inline">\(z = x\)</span> (square)</em>, the app fits <span class="math inline">\(y \sim x + x^2\)</span>; there is no separate <span class="math inline">\(z\)</span> or <span class="math inline">\(x\!:\!z\)</span> line in the table because the nonlinearity encodes the interaction.<br>
+- For <em>Dummy</em> <span class="math inline">\(z\)</span>, the app keeps <span class="math inline">\(z\)</span> exactly <span class="math inline">\(0/1\)</span> (no measurement error in <span class="math inline">\(z\)</span>) to avoid breaking the factor structure.</p>
 </section>
 </section>
 <section id="instrumental-variables" class="level1">

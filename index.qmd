@@ -48,8 +48,8 @@ In the app you can drive
 
 If you pick them so that
 $$
-\mathit{Var\_x}\times \mathit{Var\_y}
-\;\le\;\bigl(\mathit{Cov\_xy}\bigr)^2,
+\mathit{var\_x}\times \mathit{var\_y}
+\;\le\;\bigl(\mathit{cov\_xy}\bigr)^2,
 $$
 then $\det(\Sigma)\le0$ and the matrix is no longer positive‐definite. In practice that means you’ve asked R to draw from a “covariance matrix” that doesn’t correspond to any real bivariate Normal distribution.
 
@@ -101,9 +101,91 @@ In fact, OLS is the **Best Linear Unbiased Estimator (BLUE)** — it is the "lea
 
 ## Consistency vs Endogeneity 
 
+What this app shows: As sample size ($n$) grows, OLS centers around the true slope if ($\operatorname{Corr}(x,u)=0$). If you dial in endogeneity ($(\rho \ne 0)$), the sampling distribution shifts: the estimator is biased/inconsistent.
+
+How to use: Choose (n), the true ($\beta_1$), and the correlation ($\rho=\operatorname{Corr}(x,u)$). Click Simulate to see the histogram of ($\hat\beta_1$) across Monte Carlo draws. The red line is the true ($\beta_1$).
+
 [⚡ Open App](https://felixnoth.shinyapps.io/ols_consistency/){target="_blank"}
 
 [🔧 Check R Code on GitHub](https://github.com/felixnoth/Shiny-Econometrics/tree/main/apps/ols_consistency){target="_blank"} 
+
+# Regression Review II
+
+## Interaction and Nonlinearity
+
+We now visualize interaction and nonlinearity. The marginal effect of (x) on (y) in the model
+$$
+y=\beta_0+\beta_1 x+\beta_2 z+\beta_3 xz
+$$
+is $(\partial y/\partial x = \beta_1 + \beta_3 z)$: it depends on (z). If you set “(z=x)” you get a quadratic $(y=\beta_0 + (\beta_1+\beta_2)x + \beta_3 x^2)$ and $(\partial y/\partial x = \beta_1+\beta_2+2\beta_3 x)$.
+
+This Shiny app visualizes **marginal effects** and **prediction curves** for a linear model with an interaction (and an optional squared term), and it reports the **regression output** (Intercept, $x$, $z$, $x\!:\!z$). It also lets you **inject noise** to see how statistical significance shrinks (wider CIs, smaller $t$-stats).
+
+[⚡ Open App](https://felixnoth.shinyapps.io/ols_interactions/){target="_blank"}
+
+[🔧 Check R Code on GitHub](https://github.com/felixnoth/Shiny-Econometrics/tree/main/apps/ols_interactions){target="_blank"} 
+
+**Choose the Data-Generating Process (left panel)**
+
+- **$\beta_0$, $\beta_1$, $\beta_2$, $\beta_3$** — set the “true” coefficients used to generate the data:
+  - Model (continuous/dummy): $y = \beta_0 + \beta_1 x + \beta_2 z + \beta_3 xz + u$
+  - Model (square): $z=x$ and $y = \beta_0 + (\beta_1+\beta_2) x + \beta_3 x^2 + u$
+- **Type of $z$**  
+  - *Continuous*: $z \in [\text{Range}]$ (you choose the range)  
+  - *Dummy*: $z \in \{0,1\}$ (random 0/1)  
+  - *$z = x$ (square)*: sets $z=x$ and fits a quadratic in $x$
+- **Range of $z$** (continuous only): pick the min/max values used in the plots.
+
+**Add Noise to Compress Significance**
+
+- **Outcome noise SD ($\sigma_u$)** — increases residual variance; **bigger $\sigma_u$ $\Rightarrow$ wider CIs** and smaller $t$-stats.  
+- **Heteroskedastic noise** — if checked, noise scales with $1+|z|$, making uncertainty larger when $|z|$ is big.  
+- **Measurement error in $x$** — observed $x = x_{\text{true}} + \text{noise}$; induces **attenuation** (slopes shrink toward 0) and larger SEs.  
+  - *Tip:* combine higher $\sigma_u$ and $x$-measurement error for a clear loss of significance.
+
+**Simulation Controls**
+
+- **Sample size $n$** — affects precision; larger $n$ tightens CIs (holding noise fixed).  
+- **Random seed** — set for reproducibility.  
+- **Resimulate sample** — click to draw a fresh sample under your current settings.
+
+**Outputs (right panel)**
+
+- **Top row:** Two marginal-effect plots  
+
+  1. **Marginal Effect of $x$ on $y$ (vs $x$)**  
+     - Theoretical curves from your *true* $\beta$’s:
+       - *Continuous/Dummy $z$:* $\frac{\partial y}{\partial x} = \beta_1 + \beta_3 z$ (horizontal lines by $z$ level)
+       - *$z = x$ (square):* $\frac{\partial y}{\partial x} = \beta_1 + \beta_2 + 2\beta_3 x$ (curved)
+  2. **Marginal Effect of $x$ on $y$ (vs $z$) with 95\% CI**  
+     - Estimated **from the fitted model on observed data** with the current sample.  
+     - Continuous: ribbon shows 95\% CI over $z$.  
+     - Dummy: points with error bars at $z=0$ and $z=1$.  
+     - Square: treats the horizontal axis as $z=x$ and shows $\hat{\beta}_x + 2\hat{\beta}_{x^2} z$ with CI.
+
+- **Bottom row:** **Predicted $y$ vs $x$**  
+  - Draws the *true* DGP curves (using your $\beta$’s) for several $z$-levels (or a single curve when $z=x$).
+
+- **Regression output table**  
+  - Shows the **estimated coefficients and standard errors** from the model fit on **observed** variables:  
+    - *Continuous/Dummy $z$:* `(Intercept)`, $x$, $z$, $x\!:\!z$  
+    - *$z = x$ (square):* `(Intercept)`, $x$, $x^2$ (here the interaction is represented by curvature)
+
+**Quick Demos (copy-ready)**
+
+- **Show interaction:** set $\beta_1=1$, $\beta_2=0.5$, $\beta_3=0.8$; use *Continuous* $z$, range $[-3,3]$. The ME plots reveal parallel shifts when $\beta_3=0$ and diverging lines when $\beta_3 \ne 0$.
+- **Shrink significance:** increase $\sigma_u$ to $3$–$4$ and add measurement error in $x$ (e.g., $1.0$). Watch CIs widen and $t$-stats drop in the table.
+- **Heteroskedasticity:** check the box; CI in the ME-vs-$z$ plot widens in the tails.
+
+**Interpretation Tips**
+
+- The **ME vs $x$** plot uses **true $\beta$’s** for clean pedagogy (what the DGP implies).  
+- The **ME vs $z$** plot uses the **fitted model** (what your sample and noise deliver), including **95\% CIs** that react to $n$, $\sigma_u$, heteroskedasticity, and measurement error.  
+- The **Regression table** is your go-to for **statistical significance** (coefficients, SEs, $t$-values, $p$-values). Noise controls will **compress** significance by design.
+
+**Known Limits**
+- For *$z = x$ (square)*, the app fits $y \sim x + x^2$; there is no separate $z$ or $x\!:\!z$ line in the table because the nonlinearity encodes the interaction.  
+- For *Dummy* $z$, the app keeps $z$ exactly $0/1$ (no measurement error in $z$) to avoid breaking the factor structure.
 
 # Instrumental Variables
 
