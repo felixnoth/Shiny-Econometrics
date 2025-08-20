@@ -1,14 +1,19 @@
 #!/bin/bash
-set -e  # stop if any command fails
+set -euo pipefail
 
-# Render the site
+# Render site
 quarto render
 
-# Stage updated files
-git add index.qmd docs/index.html
+# Stage common site changes (+ apps and styles)
+git add -A docs index.qmd _quarto.yml styles.css apps || true
 
-# Commit with timestamp message
-git commit -m "Deploy site on $(date '+%Y-%m-%d %H:%M:%S')"
+# Commit only if there are staged changes
+if git diff --cached --quiet; then
+  echo "No changes to commit."
+else
+  git commit -m "Deploy site on $(date '+%Y-%m-%d %H:%M:%S %Z')"
+  git push origin main
+fi
 
-# Push to GitHub
-git push origin main
+# Cache-busted URL for quick check
+echo "Open: https://felixnoth.github.io/Shiny-Econometrics/?v=$(date +%s)"
