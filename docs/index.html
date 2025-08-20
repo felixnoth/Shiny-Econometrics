@@ -66,6 +66,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -102,6 +131,27 @@ ul.task-list li input[type="checkbox"] {
 <section id="welcome" class="level1">
 <h1>Welcome</h1>
 <p>Use the links below to open the interactive apps.</p>
+</section>
+<section id="regression-review-i" class="level1">
+<h1>Regression Review I</h1>
+<section id="ordinary-least-squares-ols-slope-estimate" class="level2">
+<h2 class="anchored" data-anchor-id="ordinary-least-squares-ols-slope-estimate">Ordinary Least Squares (OLS) Slope Estimate</h2>
+<p>This is the <strong>Ordinary Least Squares (OLS) slope estimate</strong>.</p>
+<p><span class="math display">\[
+\widehat{\beta}_1 = \frac{\sum_{i=1}^n (\mathit{x}_i - \bar{\mathit{x}})(\mathit{y}_i - \bar{\mathit{y}})}{\sum_{i=1}^n (\mathit{x}_i - \bar{\mathit{x}})^2}
+\]</span></p>
+<section id="what-this-slideapp-shows" class="level3">
+<h3 class="anchored" data-anchor-id="what-this-slideapp-shows">What this slide/app shows</h3>
+<ul>
+<li>The slope <span class="math inline">\(\widehat{\beta}_1\)</span> scales with <strong>covariance</strong> between (X) and (Y) and inversely with the <strong>variance</strong> of (X).<br>
+</li>
+<li>If ( (X)=0 ), the denominator collapses: OLS is <strong>undefined</strong>.<br>
+</li>
+<li>We simulate bivariate Normal data with a user-chosen covariance matrix (). For () to be valid (positive definite), [ ()=(X)(Y)-(X,Y)^2&gt;0. ] If you choose settings that violate this, a real data-generating process <strong>does not exist</strong>.</li>
+</ul>
+<p><strong>How to use the app:</strong> Move the sliders for ((X)) and ((X,Y)). Watch the regression line update and the slope in the subtitle change. Try increasing (|(X,Y)|) while holding ((X)) fixed and see (|_1|) grow. If you make ((X)) tiny, the slope becomes unstable.</p>
+</section>
+</section>
 <section id="iv-bias-weak-instruments" class="level2">
 <h2 class="anchored" data-anchor-id="iv-bias-weak-instruments">IV Bias &amp; Weak Instruments</h2>
 <p>Explore endogeneity (ρ), instrument strength (γ₁), first stage, reduced form, and the weak-instrument F-test.</p>

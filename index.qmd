@@ -7,6 +7,27 @@ format: html
 
 Use the links below to open the interactive apps.
 
+# Regression Review I
+
+## Ordinary Least Squares (OLS) Slope Estimate 
+This is the **Ordinary Least Squares (OLS) slope estimate**.
+
+$$
+\widehat{\beta}_1 = \frac{\sum_{i=1}^n (\mathit{x}_i - \bar{\mathit{x}})(\mathit{y}_i - \bar{\mathit{y}})}{\sum_{i=1}^n (\mathit{x}_i - \bar{\mathit{x}})^2}
+$$
+
+### What this slide/app shows
+
+- The slope $\widehat{\beta}_1$ scales with **covariance** between \(X\) and \(Y\) and inversely with the **variance** of \(X\).  
+- If \( \operatorname{Var}(X)=0 \), the denominator collapses: OLS is **undefined**.  
+- We simulate bivariate Normal data with a user-chosen covariance matrix \(\Sigma\). For \(\Sigma\) to be valid (positive definite),
+  \[
+  \det(\Sigma)=\operatorname{Var}(X)\operatorname{Var}(Y)-\operatorname{Cov}(X,Y)^2>0.
+  \]
+  If you choose settings that violate this, a real data-generating process **does not exist**.
+
+**How to use the app:** Move the sliders for \(\mathrm{Var}(X)\) and \(\mathrm{Cov}(X,Y)\). Watch the regression line update and the slope in the subtitle change. Try increasing \(|\mathrm{Cov}(X,Y)|\) while holding \(\mathrm{Var}(X)\) fixed and see \(|\widehat\beta_1|\) grow. If you make \(\mathrm{Var}(X)\) tiny, the slope becomes unstable.
+
 ## IV Bias & Weak Instruments
 
 Explore endogeneity (ρ), instrument strength (γ₁), first stage, reduced form, and the weak-instrument F-test.
