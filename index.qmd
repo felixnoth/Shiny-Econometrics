@@ -28,6 +28,84 @@ $$
 
 **How to use the app:** Move the sliders for \(\mathrm{Var}(X)\) and \(\mathrm{Cov}(X,Y)\). Watch the regression line update and the slope in the subtitle change. Try increasing \(|\mathrm{Cov}(X,Y)|\) while holding \(\mathrm{Var}(X)\) fixed and see \(|\widehat\beta_1|\) grow. If you make \(\mathrm{Var}(X)\) tiny, the slope becomes unstable.
 
+[⚡ Open App](https://felixnoth.shinyapps.io/ols_slope/){target="_blank"}
+
+[🔧 Check R Code on GitHub](https://github.com/felixnoth/Shiny-Econometrics/tree/main/apps/ols_slope){target="_blank"} 
+
+**When Is OLS Defined?** 
+
+We can compute $\widehat{\beta}_1$ as long as the **sample variance of $\mathit{x}$ is not 0**.
+
+If all individuals have the same $\mathit{x}$ (e.g., same schooling), the slope **cannot be identified**.
+
+A covariance matrix $\Sigma$ must satisfy two things to be valid (“positive‐definite”):
+
+1. Each variance on the diagonal must be strictly positive.  
+2. The determinant must be positive, i.e.
+   $$
+   \det(\Sigma)
+   = \mathrm{Var}(X)\,\mathrm{Var}(Y)\;-\;\bigl(\mathrm{Cov}(X,Y)\bigr)^2
+   >0.
+   $$
+
+In the app you can drive  
+- $\mathrm{Var}(X)=\mathit{var\_x}$,  
+- $\mathrm{Var}(Y)=\mathit{var\_y}$,  
+- $\mathrm{Cov}(X,Y)=\mathit{cov\_xy}$.
+
+If you pick them so that
+$$
+\mathit{var\_x}\times \mathit{var\_y}
+\;\le\;\bigl(\mathit{cov\_xy}\bigr)^2,
+$$
+then $\det(\Sigma)\le0$ and the matrix is no longer positive‐definite. In practice that means you’ve asked R to draw from a “covariance matrix” that doesn’t correspond to any real bivariate Normal distribution.
+
+**Intercept**
+
+Once we know $\widehat{\beta}_1$, we compute the **intercept**:
+
+$$
+\widehat{\beta}_0 = \bar{\mathit{y}} - \widehat{\beta}_1 \bar{\mathit{x}}
+$$
+**Squared Residuals:** We measure prediction errors by **squaring the residuals**:
+
+$$
+SSR = \sum_{i=1}^n \widehat{\varepsilon}_i^2 = \sum_{i=1}^n (\mathit{y}_i - \widehat{\beta}_0 - \widehat{\beta}_1 \mathit{x}_i)^2
+$$
+
+This is the **Sum of Squared Residuals (SSR)**. How do we pick $\widehat{\beta}_0$ and $\widehat{\beta}_1$ to **minimize SSR**?
+
+Using calculus, we find that the **minimizers** are:
+
+- $\widehat{\beta}_1$: the slope formula from earlier
+- $\widehat{\beta}_0 = \bar{\mathit{y}} - \widehat{\beta}_1 \bar{\mathit{x}}$
+
+So minimizing SSR gives us the **OLS estimators**.
+
+**The OLS Regression Line:**
+
+Once we have estimated values:
+
+$$
+\widehat{\mathit{y}}_i = \widehat{\beta}_0 + \widehat{\beta}_1 \mathit{x}_i
+$$
+
+This is the **OLS regression line** — our best linear prediction for $\mathit{y}$ given $\mathit{x}$.
+
+Once we have the **estimated coefficients** and the **OLS regression line**, we can predict the outcome $\mathit{y}$ for any sensible value of $\mathit{x}$.
+
+Just **plug in a value** for $\mathit{x}$, and compute the predicted $\mathit{y}$:
+
+$$
+\widehat{\mathit{y}} = \widehat{\beta}_0 + \widehat{\beta}_1 \mathit{x}
+$$
+
+OLS provides the **best linear prediction** of $\mathit{y}$ in the sense that it **minimizes the prediction error** among all linear estimators.
+
+There is always **some prediction error**, but OLS **minimizes** that error **on average**.
+
+In fact, OLS is the **Best Linear Unbiased Estimator (BLUE)** — it is the "least worst" linear prediction method for estimating $\mathit{y}$ from $\mathit{x}$.
+
 ## IV Bias & Weak Instruments
 
 Explore endogeneity (ρ), instrument strength (γ₁), first stage, reduced form, and the weak-instrument F-test.

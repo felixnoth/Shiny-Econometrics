@@ -150,6 +150,58 @@ window.Quarto = {
 <li>We simulate bivariate Normal data with a user-chosen covariance matrix (). For () to be valid (positive definite), [ ()=(X)(Y)-(X,Y)^2&gt;0. ] If you choose settings that violate this, a real data-generating process <strong>does not exist</strong>.</li>
 </ul>
 <p><strong>How to use the app:</strong> Move the sliders for ((X)) and ((X,Y)). Watch the regression line update and the slope in the subtitle change. Try increasing (|(X,Y)|) while holding ((X)) fixed and see (|_1|) grow. If you make ((X)) tiny, the slope becomes unstable.</p>
+<p><a href="https://felixnoth.shinyapps.io/ols_slope/" target="_blank">⚡ Open App</a></p>
+<p><a href="https://github.com/felixnoth/Shiny-Econometrics/tree/main/apps/ols_slope" target="_blank">🔧 Check R Code on GitHub</a></p>
+<p><strong>When Is OLS Defined?</strong></p>
+<p>We can compute <span class="math inline">\(\widehat{\beta}_1\)</span> as long as the <strong>sample variance of <span class="math inline">\(\mathit{x}\)</span> is not 0</strong>.</p>
+<p>If all individuals have the same <span class="math inline">\(\mathit{x}\)</span> (e.g., same schooling), the slope <strong>cannot be identified</strong>.</p>
+<p>A covariance matrix <span class="math inline">\(\Sigma\)</span> must satisfy two things to be valid (“positive‐definite”):</p>
+<ol type="1">
+<li>Each variance on the diagonal must be strictly positive.<br>
+</li>
+<li>The determinant must be positive, i.e. <span class="math display">\[
+\det(\Sigma)
+= \mathrm{Var}(X)\,\mathrm{Var}(Y)\;-\;\bigl(\mathrm{Cov}(X,Y)\bigr)^2
+&gt;0.
+\]</span></li>
+</ol>
+<p>In the app you can drive<br>
+- <span class="math inline">\(\mathrm{Var}(X)=\mathit{var\_x}\)</span>,<br>
+- <span class="math inline">\(\mathrm{Var}(Y)=\mathit{var\_y}\)</span>,<br>
+- <span class="math inline">\(\mathrm{Cov}(X,Y)=\mathit{cov\_xy}\)</span>.</p>
+<p>If you pick them so that <span class="math display">\[
+\mathit{var\_x}\times \mathit{var\_y}
+\;\le\;\bigl(\mathit{cov\_xy}\bigr)^2,
+\]</span> then <span class="math inline">\(\det(\Sigma)\le0\)</span> and the matrix is no longer positive‐definite. In practice that means you’ve asked R to draw from a “covariance matrix” that doesn’t correspond to any real bivariate Normal distribution.</p>
+<p><strong>Intercept</strong></p>
+<p>Once we know <span class="math inline">\(\widehat{\beta}_1\)</span>, we compute the <strong>intercept</strong>:</p>
+<p><span class="math display">\[
+\widehat{\beta}_0 = \bar{\mathit{y}} - \widehat{\beta}_1 \bar{\mathit{x}}
+\]</span> <strong>Squared Residuals:</strong> We measure prediction errors by <strong>squaring the residuals</strong>:</p>
+<p><span class="math display">\[
+SSR = \sum_{i=1}^n \widehat{\varepsilon}_i^2 = \sum_{i=1}^n (\mathit{y}_i - \widehat{\beta}_0 - \widehat{\beta}_1 \mathit{x}_i)^2
+\]</span></p>
+<p>This is the <strong>Sum of Squared Residuals (SSR)</strong>. How do we pick <span class="math inline">\(\widehat{\beta}_0\)</span> and <span class="math inline">\(\widehat{\beta}_1\)</span> to <strong>minimize SSR</strong>?</p>
+<p>Using calculus, we find that the <strong>minimizers</strong> are:</p>
+<ul>
+<li><span class="math inline">\(\widehat{\beta}_1\)</span>: the slope formula from earlier</li>
+<li><span class="math inline">\(\widehat{\beta}_0 = \bar{\mathit{y}} - \widehat{\beta}_1 \bar{\mathit{x}}\)</span></li>
+</ul>
+<p>So minimizing SSR gives us the <strong>OLS estimators</strong>.</p>
+<p><strong>The OLS Regression Line:</strong></p>
+<p>Once we have estimated values:</p>
+<p><span class="math display">\[
+\widehat{\mathit{y}}_i = \widehat{\beta}_0 + \widehat{\beta}_1 \mathit{x}_i
+\]</span></p>
+<p>This is the <strong>OLS regression line</strong> — our best linear prediction for <span class="math inline">\(\mathit{y}\)</span> given <span class="math inline">\(\mathit{x}\)</span>.</p>
+<p>Once we have the <strong>estimated coefficients</strong> and the <strong>OLS regression line</strong>, we can predict the outcome <span class="math inline">\(\mathit{y}\)</span> for any sensible value of <span class="math inline">\(\mathit{x}\)</span>.</p>
+<p>Just <strong>plug in a value</strong> for <span class="math inline">\(\mathit{x}\)</span>, and compute the predicted <span class="math inline">\(\mathit{y}\)</span>:</p>
+<p><span class="math display">\[
+\widehat{\mathit{y}} = \widehat{\beta}_0 + \widehat{\beta}_1 \mathit{x}
+\]</span></p>
+<p>OLS provides the <strong>best linear prediction</strong> of <span class="math inline">\(\mathit{y}\)</span> in the sense that it <strong>minimizes the prediction error</strong> among all linear estimators.</p>
+<p>There is always <strong>some prediction error</strong>, but OLS <strong>minimizes</strong> that error <strong>on average</strong>.</p>
+<p>In fact, OLS is the <strong>Best Linear Unbiased Estimator (BLUE)</strong> — it is the “least worst” linear prediction method for estimating <span class="math inline">\(\mathit{y}\)</span> from <span class="math inline">\(\mathit{x}\)</span>.</p>
 </section>
 </section>
 <section id="iv-bias-weak-instruments" class="level2">
