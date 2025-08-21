@@ -8,7 +8,7 @@ format:
 
 ---
 
-# Basic OLS
+# I. Basic OLS
 
 This app bundles six interactive modules into one interface.  
 Use the sidebar in the **combined Shiny app** to switch between modules.
@@ -178,7 +178,7 @@ In the app you can drive:
 - Predicted slope: $\beta \cdot \text{Reliability}$.  
 - More measurement error → stronger bias toward zero.
 
-# Treatment and Fixed Effects, and Inference
+# II. Treatment and Fixed Effects, and Inference
 
 This app bundles six interactive modules into one interface.  
 Use the sidebar in the **combined Shiny app** to switch between modules.
