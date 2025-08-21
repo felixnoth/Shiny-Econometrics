@@ -1,0 +1,10 @@
+name: ident_fe
+title:
+username: felixnoth
+account: felixnoth
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 15240639
+bundleId: 10800567
+url: https://felixnoth.shinyapps.io/ident_fe/
+version: 1
